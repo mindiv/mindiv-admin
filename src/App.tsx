@@ -6,10 +6,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Dasboard />,
-  },
-  {
-    path: '/settings',
-    element: <Settings />,
+    children: [
+      {
+        path: '/settings',
+        element: <Settings />,
+      },
+    ],
   },
 ]);
 
