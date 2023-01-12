@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { Button } from '../styles/GlobalStyle';
 
 const Header = () => {
   return (
     <HeaderWrap>
       <HeaderInner>
         <h2>Dashboard</h2>
-        <button>Add New</button>
+        <Button>Add New</Button>
       </HeaderInner>
     </HeaderWrap>
   );

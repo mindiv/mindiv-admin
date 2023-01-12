@@ -15,7 +15,8 @@ const Dasboard = () => {
 };
 
 const Wrap = styled.div`
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Dasboard;
