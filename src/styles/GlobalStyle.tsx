@@ -12,6 +12,13 @@ body {
 }
 `;
 
+export const Container = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+`;
+
 export const Button = styled.button`
   border: none;
   outline: none;
@@ -20,4 +27,5 @@ export const Button = styled.button`
   border-radius: 5px;
   background-color: #222;
   color: #fff;
+  cursor: pointer;
 `;

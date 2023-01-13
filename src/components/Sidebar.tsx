@@ -10,7 +10,9 @@ const Sidebar = () => {
   return (
     <SidebarWrap>
       <Logo>
-        <Link to="/">Mindiv Admin</Link>
+        <Link to="/">
+          <h2>Mindiv Admin</h2>
+        </Link>
       </Logo>
       <NavLinks>
         {links.map((link, index) => (
@@ -24,9 +26,11 @@ const Sidebar = () => {
 };
 
 const SidebarWrap = styled.div`
-  width: 300px;
+  min-width: 300px;
   background-color: #eee;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const NavLinks = styled.div`
@@ -34,6 +38,8 @@ const NavLinks = styled.div`
   flex-direction: column;
 `;
 
-const Logo = styled.div``;
+const Logo = styled.div`
+  margin-bottom: 50px;
+`;
 
 export default Sidebar;

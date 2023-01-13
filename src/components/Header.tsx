@@ -1,13 +1,19 @@
 import styled from 'styled-components';
-import { Button } from '../styles/GlobalStyle';
+import { Button, Container } from '../styles/GlobalStyle';
 
-const Header = () => {
+interface HeaderProps {
+  pageName: string;
+}
+
+const Header = ({ pageName }: HeaderProps) => {
   return (
     <HeaderWrap>
-      <HeaderInner>
-        <h2>Dashboard</h2>
-        <Button>Add New</Button>
-      </HeaderInner>
+      <Container>
+        <HeaderInner>
+          <h2>{pageName}</h2>
+          <Button>Add New</Button>
+        </HeaderInner>
+      </Container>
     </HeaderWrap>
   );
 };
@@ -32,7 +38,12 @@ const AddActions = () => {
   );
 };
 
-const HeaderWrap = styled.div``;
+const HeaderWrap = styled.div`
+  margin-bottom: 30px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+`;
 
 const HeaderInner = styled.div`
   display: flex;

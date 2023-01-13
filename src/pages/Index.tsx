@@ -1,7 +1,7 @@
-import React from 'react';
+import Stats from '../components/Stats';
 
 const Index = () => {
-  return <div>Index</div>;
+  return <Stats />;
 };
 
 export default Index;
