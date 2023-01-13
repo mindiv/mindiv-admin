@@ -2,6 +2,7 @@ import Dasboard from './pages/Dasboard';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Settings from './pages/Settings';
 import Index from './pages/Index';
+import Resources from './pages/Resources';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: '/settings',
         element: <Settings />,
+      },
+      {
+        path: '/resources',
+        element: <Resources />,
       },
     ],
   },

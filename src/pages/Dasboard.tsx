@@ -8,12 +8,13 @@ const Dasboard = () => {
   const location = useLocation();
 
   const renderPageName = () => {
-    console.log(location);
     switch (location.pathname.toLowerCase()) {
       case '/':
         return 'Dashboard';
       case '/settings':
         return 'Settings';
+      case '/resources':
+        return 'Resources';
       default:
         return 'Dashboard';
     }
@@ -43,6 +44,7 @@ const Main = styled.div`
   flex-direction: column;
   flex: 1;
   width: 100%;
+  background-color: #fafafa;
 `;
 
 export default Dasboard;
