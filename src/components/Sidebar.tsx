@@ -15,32 +15,49 @@ const links = [
 const Sidebar = () => {
   return (
     <SidebarWrap>
-      <Logo>
-        <Link to="/">Mindiv Admin</Link>
-      </Logo>
-      <NavLinks>
-        {links.map((link, index) => (
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : undefined)}
-            to={link.url}
-          >
-            <span className="link-icon">{link.icon}</span>
-            <span className="link-text" key={index}>
-              {link.name}
-            </span>
-          </NavLink>
-        ))}
-      </NavLinks>
+      <div>
+        <Logo>
+          <Link to="/">Mindiv Admin</Link>
+        </Logo>
+        <NavLinks>
+          {links.map((link, index) => (
+            <NavLink
+              className={({ isActive }) => (isActive ? 'active' : undefined)}
+              to={link.url}
+            >
+              <span className="link-icon">{link.icon}</span>
+              <span className="link-text" key={index}>
+                {link.name}
+              </span>
+            </NavLink>
+          ))}
+        </NavLinks>
+      </div>
+      <div>
+        <User />
+      </div>
     </SidebarWrap>
+  );
+};
+
+const User = () => {
+  return (
+    <UserWrap>
+      <div className="user-avatar"></div>
+      <p className="user-name">Jerry Nwosu</p>
+      <p className="user-email">jerrynwosu007@gmail.com</p>
+    </UserWrap>
   );
 };
 
 const SidebarWrap = styled.div`
   min-width: 280px;
+  max-width: 280px;
   background-color: #fff;
   padding: 30px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 const NavLinks = styled.div`
@@ -80,6 +97,29 @@ const Logo = styled.div`
     color: #222;
     font-size: 30px;
     font-weight: 900;
+  }
+`;
+
+const UserWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .user-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .user-name {
+    font-weight: 600;
+  }
+
+  .user-email {
+    color: #888;
+    font-size: 14px;
   }
 `;
 
