@@ -1,13 +1,20 @@
 import React from 'react';
+import {
+  IoChatbubble,
+  IoEllipsisVertical,
+  IoGrid,
+  IoLayers,
+  IoPeople,
+} from 'react-icons/io5';
 import styled from 'styled-components';
 import Number from './misc/Number';
 
 const Stats = () => {
   const statsData = [
-    { name: 'Users', total: 18000000 },
-    { name: 'Categories', total: 100 },
-    { name: 'Collections', total: 980 },
-    { name: 'Questions', total: 823000 },
+    { name: 'Users', total: 18000000, icon: <IoPeople /> },
+    { name: 'Categories', total: 100, icon: <IoGrid /> },
+    { name: 'Collections', total: 980, icon: <IoLayers /> },
+    { name: 'Questions', total: 823000, icon: <IoChatbubble /> },
   ];
 
   return (
@@ -22,17 +29,23 @@ const Stats = () => {
 };
 
 interface StatsProps {
-  data: { name: string; total: number };
+  data: { name: string; total: number; icon: JSX.Element };
 }
 
 const StatCard = ({ data }: StatsProps) => {
   return (
     <Card>
       <div>
+        <div className="card-top">
+          <div className="card-icon">{data.icon}</div>
+          <div className="card-more">
+            <IoEllipsisVertical />
+          </div>
+        </div>
+        <p className="card-title">{data.name}</p>
         <h2>
           <Number number={data.total} />
         </h2>
-        <p>{data.name}</p>
       </div>
     </Card>
   );
@@ -52,6 +65,41 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+  .card-title {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .card-top {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+  }
+
+  .card-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    :hover {
+      background-color: #eee;
+    }
+  }
 `;
 
 export default Stats;
