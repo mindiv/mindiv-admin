@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Number from './misc/Number';
 
 const Stats = () => {
   const statsData = [
@@ -28,7 +29,9 @@ const StatCard = ({ data }: StatsProps) => {
   return (
     <Card>
       <div>
-        <h2>{data.total}</h2>
+        <h2>
+          <Number number={data.total} />
+        </h2>
         <p>{data.name}</p>
       </div>
     </Card>
