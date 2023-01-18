@@ -8,6 +8,7 @@ import Settings from './pages/Settings';
 import Index from './pages/Index';
 import Resources from './pages/Resources';
 import Auth from './pages/Auth';
+import AddCategory from './components/AddCategory';
 
 interface PRProps {
   auth: boolean;
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <AddCategory />
       <RouterProvider router={router} />
     </>
   );

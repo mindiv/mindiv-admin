@@ -63,8 +63,8 @@ const HeaderWrap = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+  /* background-color: #fff;
+  border-bottom: 1px solid #eee; */
 `;
 
 const HeaderInner = styled.div`
