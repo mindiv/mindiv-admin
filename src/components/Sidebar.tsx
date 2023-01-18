@@ -24,11 +24,10 @@ const Sidebar = () => {
             <NavLink
               className={({ isActive }) => (isActive ? 'active' : undefined)}
               to={link.url}
+              key={index}
             >
               <span className="link-icon">{link.icon}</span>
-              <span className="link-text" key={index}>
-                {link.name}
-              </span>
+              <span className="link-text">{link.name}</span>
             </NavLink>
           ))}
         </NavLinks>

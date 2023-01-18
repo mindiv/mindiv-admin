@@ -1,14 +1,13 @@
 import Dasboard from './pages/Dasboard';
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import Settings from './pages/Settings';
 import Index from './pages/Index';
 import Resources from './pages/Resources';
 import Auth from './pages/Auth';
-import AddCategory from './components/AddCategory';
+import NewCategory from './pages/NewCategory';
+import NewCollection from './pages/NewCollection';
+import NewQuestion from './pages/NewQuestion';
+import NewUser from './pages/NewUser';
 
 interface PRProps {
   auth: boolean;
@@ -23,37 +22,38 @@ const PublicRoute: React.FC<PRProps> = ({ auth, children }) => {
   return auth ? <Navigate to="/" replace /> : children;
 };
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Dasboard />,
-    children: [
-      {
-        index: true,
-        element: <Index />,
-      },
-
-      {
-        path: '/settings',
-        element: <Settings />,
-      },
-      {
-        path: '/resources',
-        element: <Resources />,
-      },
-    ],
-  },
-  {
-    path: '/auth',
-    element: <Auth />,
-  },
-]);
-
 function App() {
   return (
     <>
-      <AddCategory />
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute auth={true}>
+                <Dasboard />
+              </ProtectedRoute>
+            }
+          >
+            <Route index={true} element={<Index />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/new/category" element={<NewCategory />} />
+            <Route path="/new/collection" element={<NewCollection />} />
+            <Route path="/new/question" element={<NewQuestion />} />
+            <Route path="/new/user" element={<NewUser />} />
+          </Route>
+          <Route
+            path="/auth"
+            element={
+              <PublicRoute auth={true}>
+                <Auth />
+              </PublicRoute>
+            }
+          />
+          <Route path="*" element={'404'} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

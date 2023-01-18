@@ -1,4 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled, { IntrinsicElementsKeys } from 'styled-components';
 import { Button, Container } from '../styles/GlobalStyle';
 
@@ -17,9 +18,7 @@ const Header = ({ pageName }: HeaderProps) => {
     <HeaderWrap>
       <Container>
         <HeaderInner>
-          <Heading>
-            <h2>{pageName}</h2>
-          </Heading>
+          <Heading>{pageName}</Heading>
           <Button onClick={toggleVisibility}>Add New</Button>
           {visible && <AddItems close={() => setVisible(false)} />}
         </HeaderInner>
@@ -34,13 +33,12 @@ interface AddItemsProps {
 
 const AddItems = ({ close }: AddItemsProps) => {
   const actions = [
-    { name: 'Category' },
-    { name: 'Collection' },
-    { name: 'Question' },
-    { name: 'User' },
+    { name: 'Category', url: '/new/category' },
+    { name: 'Collection', url: '/new/collection' },
+    { name: 'Question', url: '/new/question' },
+    { name: 'User', url: '/new/user' },
   ];
   const handleAction = (action: string) => {
-    console.log(action);
     close();
   };
 
@@ -49,9 +47,13 @@ const AddItems = ({ close }: AddItemsProps) => {
       <Overlay onClick={() => close()} />
       <AddList>
         {actions.map((action, index) => (
-          <p key={index} onClick={() => handleAction(action.name)}>
+          <Link
+            to={action.url}
+            key={index}
+            onClick={() => handleAction(action.name)}
+          >
             New {action.name}
-          </p>
+          </Link>
         ))}
       </AddList>
     </>
@@ -63,8 +65,6 @@ const HeaderWrap = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
-  /* background-color: #fff;
-  border-bottom: 1px solid #eee; */
 `;
 
 const HeaderInner = styled.div`
@@ -90,11 +90,15 @@ const AddList = styled.div`
   padding: 5px 0;
   min-width: 200px;
   border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
 
-  p {
+  a {
     padding: 8px 20px;
     cursor: pointer;
     font-size: 14px;
+    text-decoration: none;
+    color: #222;
     :hover {
       background-color: #222;
       color: #fff;

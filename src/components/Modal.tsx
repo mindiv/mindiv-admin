@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ModalProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   close: Function;
   title: string;
 }
