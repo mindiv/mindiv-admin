@@ -30,7 +30,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute auth={true}>
+              <ProtectedRoute auth={false}>
                 <Dasboard />
               </ProtectedRoute>
             }
@@ -46,7 +46,7 @@ function App() {
           <Route
             path="/auth"
             element={
-              <PublicRoute auth={true}>
+              <PublicRoute auth={false}>
                 <Auth />
               </PublicRoute>
             }

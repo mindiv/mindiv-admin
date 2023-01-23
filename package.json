@@ -21,6 +21,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "react-select": "^5.7.0",
+    "react-shadow-component": "^1.0.9",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"
   },
