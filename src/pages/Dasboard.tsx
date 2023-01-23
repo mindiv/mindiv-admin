@@ -1,30 +1,15 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Container } from '../styles/GlobalStyle';
 
 const Dasboard = () => {
-  const location = useLocation();
-
-  const renderPageName = () => {
-    switch (location.pathname.toLowerCase()) {
-      case '/':
-        return 'Dashboard';
-      case '/settings':
-        return 'Settings';
-      case '/resources':
-        return 'Resources';
-      default:
-        return 'Dashboard';
-    }
-  };
-
   return (
     <Wrap>
       <Sidebar />
       <Main>
-        <Header pageName={renderPageName()} />
+        <Header />
         <Container>
           <Outlet />
         </Container>
@@ -44,7 +29,7 @@ const Main = styled.div`
   flex-direction: column;
   flex: 1;
   width: 100%;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 `;
 
 export default Dasboard;

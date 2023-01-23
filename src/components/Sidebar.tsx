@@ -1,15 +1,17 @@
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  IoLibraryOutline,
-  IoStatsChartOutline,
-  IoSettingsOutline,
+  IoLibrary,
+  IoStatsChart,
+  IoSettings,
+  IoLogOut,
+  IoMoon,
 } from 'react-icons/io5';
 
 const links = [
-  { name: 'Dasboard', url: '/', icon: <IoStatsChartOutline /> },
-  { name: 'Resources', url: '/resources', icon: <IoLibraryOutline /> },
-  { name: 'Settings', url: '/settings', icon: <IoSettingsOutline /> },
+  { name: 'Dasboard', url: '/', icon: <IoStatsChart /> },
+  { name: 'Resources', url: '/resources', icon: <IoLibrary /> },
+  { name: 'Settings', url: '/settings', icon: <IoSettings /> },
 ];
 
 const Sidebar = () => {
@@ -40,23 +42,33 @@ const Sidebar = () => {
 };
 
 const User = () => {
+  const handleTheme = () => {};
   return (
     <UserWrap>
       <div className="user-avatar"></div>
       <p className="user-name">Jerry Nwosu</p>
       <p className="user-email">jerrynwosu007@gmail.com</p>
+      <Actions>
+        <button title="Toggle Theme" onClick={handleTheme}>
+          <IoMoon />
+        </button>
+        <button title="Logout">
+          <IoLogOut />
+        </button>
+      </Actions>
     </UserWrap>
   );
 };
 
 const SidebarWrap = styled.div`
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 250px;
+  max-width: 250px;
   background-color: #fff;
   padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-right: 1px solid #eee;
 `;
 
 const NavLinks = styled.div`
@@ -71,6 +83,7 @@ const NavLinks = styled.div`
     align-items: center;
     align-items: center;
     font-size: 14px;
+    font-weight: 600;
 
     span {
       display: flex;
@@ -105,9 +118,9 @@ const UserWrap = styled.div`
   justify-content: center;
   align-items: center;
   .user-avatar {
-    width: 80px;
-    height: 80px;
-    background-color: #eee;
+    width: 60px;
+    height: 60px;
+    background-color: #888;
     border-radius: 50%;
     margin-bottom: 10px;
   }
@@ -117,8 +130,29 @@ const UserWrap = styled.div`
   }
 
   .user-email {
-    color: #888;
+    color: #555;
     font-size: 14px;
+  }
+`;
+
+const Actions = styled.div`
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+
+  button {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    cursor: pointer;
   }
 `;
 

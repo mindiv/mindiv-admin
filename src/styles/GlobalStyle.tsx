@@ -19,23 +19,38 @@ export const Container = styled.div`
   padding: 0 20px;
 `;
 
+export const InputGroup = styled.div`
+  margin-bottom: 30px;
+`;
+
 export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   label {
     color: #333;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
 
-  input {
+  input,
+  textarea {
     width: 100%;
-    height: 40px;
+    height: 35px;
     border-radius: 5px;
-    border: 1px solid #888;
+    border: 1px solid #ccc;
     outline: none;
-    padding: 0 10px;
+    padding: 10px;
+  }
+
+  textarea {
+    height: 80px;
+    max-height: 200px;
+    resize: vertical;
   }
 `;
+
+export const Heading1 = styled.h1``;
 
 export const Button = styled.button`
   border: none;
@@ -46,4 +61,9 @@ export const Button = styled.button`
   background-color: #222;
   color: #fff;
   cursor: pointer;
+`;
+
+export const PageWrap = styled.div`
+  width: 100%;
+  max-width: 600px;
 `;

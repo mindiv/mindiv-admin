@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  IoChatbubble,
-  IoEllipsisVertical,
-  IoGrid,
-  IoLayers,
-  IoPeople,
-} from 'react-icons/io5';
+import { IoChatbubble, IoGrid, IoLayers, IoPeople } from 'react-icons/io5';
 import styled from 'styled-components';
 import Number from './misc/Number';
 
@@ -38,9 +32,6 @@ const StatCard = ({ data }: StatsProps) => {
       <div>
         <div className="card-top">
           <div className="card-icon">{data.icon}</div>
-          <div className="card-more">
-            <IoEllipsisVertical />
-          </div>
         </div>
         <p className="card-title">{data.name}</p>
         <h2>
@@ -63,8 +54,7 @@ const Card = styled.div`
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border: 1px solid #eee;
 
   .card-title {
     font-size: 16px;

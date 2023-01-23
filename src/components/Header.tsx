@@ -1,13 +1,10 @@
-import { MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled, { IntrinsicElementsKeys } from 'styled-components';
+import styled from 'styled-components';
 import { Button, Container } from '../styles/GlobalStyle';
+import Search from './Search';
 
-interface HeaderProps {
-  pageName: string;
-}
-
-const Header = ({ pageName }: HeaderProps) => {
+const Header = () => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -18,7 +15,7 @@ const Header = ({ pageName }: HeaderProps) => {
     <HeaderWrap>
       <Container>
         <HeaderInner>
-          <Heading>{pageName}</Heading>
+          <Search />
           <Button onClick={toggleVisibility}>Add New</Button>
           {visible && <AddItems close={() => setVisible(false)} />}
         </HeaderInner>
@@ -98,7 +95,8 @@ const AddList = styled.div`
     cursor: pointer;
     font-size: 14px;
     text-decoration: none;
-    color: #222;
+    color: #444;
+    font-weight: 600;
     :hover {
       background-color: #222;
       color: #fff;

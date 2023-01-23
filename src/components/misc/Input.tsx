@@ -1,4 +1,5 @@
 import { InputWrap } from '../../styles/GlobalStyle';
+import ErrorText from './ErrorText';
 
 interface CProps {
   method: any;
@@ -16,7 +17,21 @@ export const CInput = ({ method, name, label }: CProps) => {
     <InputWrap>
       <label>{label}</label>
       <input type="text" {...register(`${name}`)} />
-      <span>{errors[name]?.message}</span>
+      <ErrorText text={errors[name]?.message} />
+    </InputWrap>
+  );
+};
+
+export const CTextarea = ({ method, name, label }: CProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = method;
+  return (
+    <InputWrap>
+      <label>{label}</label>
+      <textarea {...register(`${name}`)} />
+      <ErrorText text={errors[name]?.message} />
     </InputWrap>
   );
 };
@@ -30,7 +45,7 @@ export const CSelect = ({ method, name, label }: CProps) => {
   return (
     <InputWrap>
       <label>{label}</label>
-      <input />
+      <ErrorText text={errors[name]?.message} />
     </InputWrap>
   );
 };
