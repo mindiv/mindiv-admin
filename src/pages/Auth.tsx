@@ -69,5 +69,6 @@ const LoginCard = styled.div`
   border-radius: 5px;
   padding: 30px;
   width: 350px;
+  border: 1px solid #eee;
 `;
 export default Auth;
