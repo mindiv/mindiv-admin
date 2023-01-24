@@ -29,7 +29,7 @@ export const InputWrap = styled.div`
   margin-bottom: 10px;
   label {
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
   }
 

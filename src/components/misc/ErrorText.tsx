@@ -14,6 +14,9 @@ const ErrorText = ({ text }: ErrorTextProps) => {
 
 const ErrorTextWrap = styled.div`
   display: flex;
+  font-size: 12px;
+  color: #ff0000;
+  padding: 3px;
 `;
 
 export default ErrorText;

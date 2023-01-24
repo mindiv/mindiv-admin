@@ -6,8 +6,11 @@ import { CInput } from '../components/misc/Input';
 import * as yup from 'yup';
 import { Button } from '../styles/GlobalStyle';
 import { BoxShadow } from 'react-shadow-component';
+import { authenticateAdmin } from '../features/authSlice';
+import { useAppDispatch } from '../app/hooks';
 
 const Auth: React.FC = () => {
+  const dispatch = useAppDispatch();
   const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -24,7 +27,7 @@ const Auth: React.FC = () => {
   const { handleSubmit } = method;
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    dispatch(authenticateAdmin(data));
   };
 
   return (
