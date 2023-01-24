@@ -8,6 +8,7 @@ import NewCategory from './pages/NewCategory';
 import NewCollection from './pages/NewCollection';
 import NewQuestion from './pages/NewQuestion';
 import NewUser from './pages/NewUser';
+import { useAppSelector } from './app/hooks';
 
 interface PRProps {
   auth: boolean;
@@ -23,6 +24,7 @@ const PublicRoute: React.FC<PRProps> = ({ auth, children }) => {
 };
 
 function App() {
+  const { isAuth } = useAppSelector((state) => state.auth);
   return (
     <>
       <BrowserRouter>
@@ -30,7 +32,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute auth={false}>
+              <ProtectedRoute auth={isAuth}>
                 <Dasboard />
               </ProtectedRoute>
             }
@@ -46,7 +48,7 @@ function App() {
           <Route
             path="/auth"
             element={
-              <PublicRoute auth={false}>
+              <PublicRoute auth={isAuth}>
                 <Auth />
               </PublicRoute>
             }

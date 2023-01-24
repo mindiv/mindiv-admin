@@ -7,6 +7,8 @@ import {
   IoLogOut,
   IoMoon,
 } from 'react-icons/io5';
+import { useAppDispatch } from '../app/hooks';
+import { clearAuthTokenFromStorage } from '../features/authSlice';
 
 const links = [
   { name: 'Dasboard', url: '/', icon: <IoStatsChart /> },
@@ -42,7 +44,11 @@ const Sidebar = () => {
 };
 
 const User = () => {
+  const dispatch = useAppDispatch();
   const handleTheme = () => {};
+  const onLogout = () => {
+    dispatch(clearAuthTokenFromStorage());
+  };
   return (
     <UserWrap>
       <div className="user-avatar"></div>
@@ -52,7 +58,7 @@ const User = () => {
         <button title="Toggle Theme" onClick={handleTheme}>
           <IoMoon />
         </button>
-        <button title="Logout">
+        <button title="Logout" onClick={onLogout}>
           <IoLogOut />
         </button>
       </Actions>

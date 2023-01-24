@@ -41,6 +41,8 @@ export const InputWrap = styled.div`
     border: 1px solid #ccc;
     outline: none;
     padding: 10px;
+    font-size: 14px;
+    color: #444;
   }
 
   textarea {

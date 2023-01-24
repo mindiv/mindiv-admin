@@ -1,15 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../services/api';
 import { BASE_URL } from '../utils/constants';
+import { getFromLS, setToLS } from '../utils/storage';
 
 type AuthState = {
   user: any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  isAuth: boolean;
 };
 
 const initialState: AuthState = {
   user: null,
   status: 'idle',
+  isAuth: false,
 };
 
 export const authenticateAdmin = createAsyncThunk(
@@ -27,7 +30,20 @@ export const authenticateAdmin = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    getAuthTokenFromStorage(state) {
+      const token = getFromLS('token')?.accessToken;
+      if (token) {
+        state.isAuth = true;
+      } else {
+        state.isAuth = false;
+      }
+    },
+    clearAuthTokenFromStorage(state) {
+      localStorage.removeItem('token');
+      location.reload();
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authenticateAdmin.pending, (state) => {
@@ -36,6 +52,8 @@ const authSlice = createSlice({
       .addCase(authenticateAdmin.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
+        setToLS('token', action.payload);
+        location.reload();
       })
       .addCase(authenticateAdmin.rejected, (state, action) => {
         state.status = 'failed';
@@ -43,5 +61,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {} = authSlice.actions;
+export const { getAuthTokenFromStorage, clearAuthTokenFromStorage } =
+  authSlice.actions;
 export default authSlice.reducer;
