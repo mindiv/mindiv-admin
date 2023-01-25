@@ -1,4 +1,11 @@
 export interface Theme {
-  primaryColor: string;
-  secondaryColor: string;
+  colors: {
+    background: string;
+    secondary: string;
+    text: string;
+    accent: string;
+    highlight: string;
+    borderColor: string;
+    inputBg: string;
+  };
 }

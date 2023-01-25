@@ -7,10 +7,12 @@ import * as yup from 'yup';
 import { Button, InputGroup } from '../styles/GlobalStyle';
 import { BoxShadow } from 'react-shadow-component';
 import { authenticateAdmin } from '../features/authSlice';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.auth);
+
   const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -42,10 +44,15 @@ const Auth: React.FC = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputGroup>
               <CInput name="email" label="Email" method={method} />
-              <CInput name="password" label="Password" method={method} />
+              <CInput
+                name="password"
+                label="Password"
+                method={method}
+                type="password"
+              />
             </InputGroup>
             <ButtonWrap>
-              <Button>Login</Button>
+              <Button>{'Login'}</Button>
             </ButtonWrap>
           </form>
         </LoginCard>
@@ -62,23 +69,24 @@ const AuthWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 const Backdrop = styled.div`
   position: fixed;
   display: flex;
   width: 100%;
   height: 50vh;
-  background-color: #eee;
+  background-color: ${(props) => props.theme.colors.borderColor};
   top: 0;
   left: 0;
 `;
 const LoginCard = styled.div`
   position: relative;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 8px;
   padding: 30px;
   width: 350px;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
 `;
 
 const ButtonWrap = styled.div`
@@ -97,6 +105,7 @@ const Hello = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 40px;
+  color: ${(props) => props.theme.colors.text};
 
   h1 {
     font-size: 50px;

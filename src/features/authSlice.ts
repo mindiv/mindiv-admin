@@ -39,7 +39,7 @@ const authSlice = createSlice({
         state.isAuth = false;
       }
     },
-    clearAuthTokenFromStorage(state) {
+    clearAuthTokenFromStorage() {
       localStorage.removeItem('token');
       location.reload();
     },
@@ -55,7 +55,7 @@ const authSlice = createSlice({
         setToLS('token', action.payload);
         location.reload();
       })
-      .addCase(authenticateAdmin.rejected, (state, action) => {
+      .addCase(authenticateAdmin.rejected, (state) => {
         state.status = 'failed';
       });
   },

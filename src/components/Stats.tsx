@@ -51,17 +51,19 @@ const CardWrap = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.background};
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
+  color: ${(props) => props.theme.colors.text};
 
   .card-title {
     font-size: 16px;
-    color: #555;
+    color: ${(props) => props.theme.colors.text};
   }
 
   .card-top {
+    color: ${(props) => props.theme.colors.text};
     display: flex;
     margin-bottom: 20px;
     align-items: center;
@@ -71,7 +73,7 @@ const Card = styled.div`
   .card-icon {
     width: 50px;
     height: 50px;
-    background-color: #eee;
+    background-color: ${(props) => props.theme.colors.secondary};
     border-radius: 50%;
     display: flex;
     justify-content: center;

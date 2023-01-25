@@ -22,6 +22,7 @@ const Wrap = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 const Main = styled.div`
@@ -29,7 +30,6 @@ const Main = styled.div`
   flex-direction: column;
   flex: 1;
   width: 100%;
-  /* background-color: #fafafa; */
 `;
 
 export default Dasboard;

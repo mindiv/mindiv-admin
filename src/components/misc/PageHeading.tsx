@@ -20,6 +20,7 @@ const PHWrap = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export default PageHeading;

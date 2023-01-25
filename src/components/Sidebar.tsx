@@ -7,8 +7,9 @@ import {
   IoLogOut,
   IoMoon,
 } from 'react-icons/io5';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { clearAuthTokenFromStorage } from '../features/authSlice';
+import { setThemeMode } from '../features/appSlice';
 
 const links = [
   { name: 'Dasboard', url: '/', icon: <IoStatsChart /> },
@@ -45,7 +46,11 @@ const Sidebar = () => {
 
 const User = () => {
   const dispatch = useAppDispatch();
-  const handleTheme = () => {};
+  const { mode } = useAppSelector((state) => state.app);
+
+  const onTheme = () => {
+    dispatch(setThemeMode(mode === 'light' ? 'dark' : 'light'));
+  };
   const onLogout = () => {
     dispatch(clearAuthTokenFromStorage());
   };
@@ -55,7 +60,7 @@ const User = () => {
       <p className="user-name">Jerry Nwosu</p>
       <p className="user-email">jerrynwosu007@gmail.com</p>
       <Actions>
-        <button title="Toggle Theme" onClick={handleTheme}>
+        <button title="Toggle Theme" onClick={onTheme}>
           <IoMoon />
         </button>
         <button title="Logout" onClick={onLogout}>
@@ -69,12 +74,12 @@ const User = () => {
 const SidebarWrap = styled.div`
   min-width: 250px;
   max-width: 250px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.background};
   padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-right: 1px solid #eee;
+  border-right: 1px solid ${(props) => props.theme.colors.borderColor};
 `;
 
 const NavLinks = styled.div`
@@ -84,7 +89,7 @@ const NavLinks = styled.div`
     padding: 12px 15px;
     border-radius: 6px;
     text-decoration: none;
-    color: #222;
+    color: ${(props) => props.theme.colors.text};
     display: flex;
     align-items: center;
     align-items: center;
@@ -112,7 +117,7 @@ const Logo = styled.div`
   a {
     margin-bottom: 50px;
     text-decoration: none;
-    color: #222;
+    color: ${(props) => props.theme.colors.text};
     font-size: 30px;
     font-weight: 900;
   }
@@ -133,10 +138,11 @@ const UserWrap = styled.div`
 
   .user-name {
     font-weight: 600;
+    color: ${(props) => props.theme.colors.text};
   }
 
   .user-email {
-    color: #555;
+    color: ${(props) => props.theme.colors.text};
     font-size: 14px;
   }
 `;
@@ -153,12 +159,12 @@ const Actions = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    background-color: #fff;
-    border: 1px solid #eee;
+    background-color: ${(props) => props.theme.colors.secondary};
+    border: 1px solid ${(props) => props.theme.colors.borderColor};
     outline: none;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     cursor: pointer;
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 

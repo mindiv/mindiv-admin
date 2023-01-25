@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ErrorTextProps {
-  text: string;
+  text: string | any;
 }
 const ErrorText = ({ text }: ErrorTextProps) => {
   return (

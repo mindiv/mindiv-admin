@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BoxShadow } from 'react-shadow-component';
 import styled from 'styled-components';
 import { Button, Container } from '../styles/GlobalStyle';
 import Search from './Search';
@@ -42,17 +43,19 @@ const AddItems = ({ close }: AddItemsProps) => {
   return (
     <>
       <Overlay onClick={() => close()} />
-      <AddList>
-        {actions.map((action, index) => (
-          <Link
-            to={action.url}
-            key={index}
-            onClick={() => handleAction(action.name)}
-          >
-            New {action.name}
-          </Link>
-        ))}
-      </AddList>
+      <BoxShadow shadowStyle="shadow4_1">
+        <AddList>
+          {actions.map((action, index) => (
+            <Link
+              to={action.url}
+              key={index}
+              onClick={() => handleAction(action.name)}
+            >
+              New {action.name}
+            </Link>
+          ))}
+        </AddList>
+      </BoxShadow>
     </>
   );
 };
@@ -80,13 +83,13 @@ const AddList = styled.div`
   z-index: 999;
   right: 0;
   top: 50px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  background-color: ${(props) => props.theme.colors.background};
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
   border-radius: 5px;
   padding: 5px 0;
   min-width: 200px;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
   display: flex;
   flex-direction: column;
 
@@ -95,7 +98,7 @@ const AddList = styled.div`
     cursor: pointer;
     font-size: 14px;
     text-decoration: none;
-    color: #444;
+    color: ${(props) => props.theme.colors.text};
     font-weight: 600;
     :hover {
       background-color: #222;

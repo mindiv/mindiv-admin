@@ -22,6 +22,7 @@
     "react-router-dom": "^6.6.1",
     "react-select": "^5.7.0",
     "react-shadow-component": "^1.0.11",
+    "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
     "tslib": "^2.4.1",
     "yup": "^0.32.11"

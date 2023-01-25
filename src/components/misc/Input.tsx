@@ -1,3 +1,4 @@
+import React from 'react';
 import { InputWrap } from '../../styles/GlobalStyle';
 import ErrorText from './ErrorText';
 
@@ -5,10 +6,17 @@ interface CProps {
   method: any;
   name: string;
   label: string;
+  type?: string;
 }
 
 // Custom input
-export const CInput = ({ method, name, label }: CProps) => {
+export const CInput = ({
+  method,
+  name,
+  label,
+  type = 'text',
+  ...rest
+}: CProps) => {
   const {
     register,
     formState: { errors },
@@ -16,8 +24,10 @@ export const CInput = ({ method, name, label }: CProps) => {
   return (
     <InputWrap>
       <label>{label}</label>
-      <input type="text" {...register(`${name}`)} />
-      <ErrorText text={errors[name]?.message} />
+      <input type={type} {...rest} {...register(`${name}`)} />
+      {errors[name]?.message && (
+        <ErrorText text={errors[name]?.message || ''} />
+      )}
     </InputWrap>
   );
 };

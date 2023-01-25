@@ -1,6 +1,11 @@
 import React from 'react';
 import { CInput, CTextarea } from '../components/misc/Input';
-import { Button, Heading1, InputGroup, PageWrap } from '../styles/GlobalStyle';
+import {
+  Button,
+  InputGroup,
+  PageContent,
+  PageWrap,
+} from '../styles/GlobalStyle';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,16 +33,26 @@ const NewCategory = () => {
 
   return (
     <>
-      <PageHeading title="New Category" tag="Create new category " />
       <PageWrap>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <InputGroup>
-            <CInput name="categoryName" label="Category Name" method={method} />
-            <CTextarea name="description" label="Description" method={method} />
-            <CInput name="cover" label="Cover Photo" method={method} />
-          </InputGroup>
-          <Button>Create</Button>
-        </form>
+        <PageHeading title="New Category" tag="Create new category " />
+        <PageContent>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <InputGroup>
+              <CInput
+                name="categoryName"
+                label="Category Name"
+                method={method}
+              />
+              <CTextarea
+                name="description"
+                label="Description"
+                method={method}
+              />
+              <CInput name="cover" label="Cover Photo" method={method} />
+            </InputGroup>
+            <Button>Create category</Button>
+          </form>
+        </PageContent>
       </PageWrap>
     </>
   );
