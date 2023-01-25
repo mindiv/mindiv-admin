@@ -107,8 +107,8 @@ const NavLinks = styled.div`
     }
   }
   .active {
-    background-color: #222;
-    color: #ccc;
+    background-color: ${(props) => props.theme.colors.accent};
+    color: #fff;
   }
 `;
 
