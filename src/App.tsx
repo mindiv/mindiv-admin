@@ -9,6 +9,8 @@ import NewCollection from './pages/NewCollection';
 import NewQuestion from './pages/NewQuestion';
 import NewUser from './pages/NewUser';
 import { useAppSelector } from './app/hooks';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface PRProps {
   auth: boolean;
@@ -27,6 +29,7 @@ function App() {
   const { isAuth } = useAppSelector((state) => state.auth);
   return (
     <>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route

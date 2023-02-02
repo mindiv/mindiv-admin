@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { CInput } from '../components/misc/Input';
@@ -8,10 +8,13 @@ import { Button, InputGroup } from '../styles/GlobalStyle';
 import { BoxShadow } from 'react-shadow-component';
 import { authenticateAdmin } from '../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { toast } from 'react-toastify';
 
 const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state) => state.auth);
+  const notifySuccess = () => toast('Logged in');
+  const notifyError = () => toast.error('Failed');
 
   const schema = yup.object({
     email: yup.string().email().required(),
@@ -31,6 +34,11 @@ const Auth: React.FC = () => {
   const onSubmit = (data: any) => {
     dispatch(authenticateAdmin(data));
   };
+
+  useEffect(() => {
+    if (status === 'failed') notifyError();
+    if (status === 'succeeded') notifySuccess();
+  }, [status]);
 
   return (
     <AuthWrap>

@@ -29,7 +29,7 @@ interface StatsProps {
 const StatCard = ({ data }: StatsProps) => {
   return (
     <Card>
-      <div>
+      <div className="">
         <div className="card-top">
           <div className="card-icon">{data.icon}</div>
         </div>
