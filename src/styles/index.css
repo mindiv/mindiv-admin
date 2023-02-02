@@ -1,7 +1,3 @@
-.color-light {
-  color: #888;
-}
-
-.color-dark {
-  color: #111;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
