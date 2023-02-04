@@ -39,8 +39,8 @@ const Auth: React.FC = () => {
   }, [status]);
 
   return (
-    <div className="dark:bg-gray-900  h-screen flex flex-col justify-center items-center">
-      <h1 className="mb-2 font-bold text-5xl text-gray-900 dark:text-white">
+    <div className="dark:bg-gray-900  h-screen flex flex-col justify-center items-center p-3 md:p-0">
+      <h1 className="mb-2 font-bold text-4xl text-gray-900 dark:text-white sm:text-5xl">
         Admin Login
       </h1>
       <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
@@ -49,12 +49,18 @@ const Auth: React.FC = () => {
       <div className="w-full md:mt-0 sm:max-w-md bg-white dark:bg-gray-800 border shadow border-gray-200 dark:border-gray-700 rounded-lg">
         <div className="p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <CInput name="email" label="Email" method={method} />
+            <CInput
+              name="email"
+              label="Email"
+              method={method}
+              placeholder="example@mindiv.app"
+            />
             <CInput
               name="password"
               label="Password"
               method={method}
               type="password"
+              placeholder="********"
             />
             <ButtonPrimary />
           </form>
