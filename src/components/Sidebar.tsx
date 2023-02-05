@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden md:flex flex-col px-5 py-5 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200">
+    <div className="hidden md:flex flex-col px-5 py-6 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200">
       <div>
         <div className="pb-8 text-2xl">
           <Link to="/">Mindiv Admin</Link>
@@ -28,15 +28,13 @@ const Sidebar = () => {
           {links.map((link, index) => (
             <NavLink
               className={({ isActive }) =>
-                (isActive
-                  ? 'active dark:bg-gray-700 dark:hover:text-gray-200 bg-gray-300'
-                  : '') +
-                ' flex items-center p-3 text-base font-normal rounded-lg hover:text-grey-100 dark:hover:text-gray-400'
+                (isActive ? 'dark:bg-gray-700 bg-gray-100' : '') +
+                ' flex items-center p-3 text-base text-gray-600 dark:text-gray-200 font-normal rounded-lg hover:text-grey-100 dark:hover:text-gray-400'
               }
               to={link.url}
               key={index}
             >
-              <span className="mr-5 transition duration-75 text-gray-500 dark:text-gray-400">
+              <span className="mr-5 transition duration-75 text-gray-500 text-lg dark:text-gray-400">
                 {link.icon}
               </span>
               <span className="link-text">{link.name}</span>
@@ -44,11 +42,18 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
-      <div>
-        <ToggleTheme />
-        <SquareBtn click={onLogout}>
-          <IoLogOut />
-        </SquareBtn>
+      <div className="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-500 rounded-lg p-4 shadow-xl">
+        <div className="flex flex-col justify-center items-center mb-5 text-gray-700 dark:text-gray-200">
+          <div className="w-20 h-20 bg-gray-300 rounded-full mb-3"></div>
+          <h3 className="text-lg font-semibold">Jerry Nwosu</h3>
+          <p className="text-sm">jerrynwosu007@gmail.com</p>
+        </div>
+        <div className="flex gap-4">
+          <ToggleTheme />
+          <SquareBtn click={onLogout}>
+            <IoLogOut />
+          </SquareBtn>
+        </div>
       </div>
     </div>
   );
