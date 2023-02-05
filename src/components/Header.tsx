@@ -15,9 +15,13 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center h-20">
-      <Search />
-      <ButtonPrimary>Add New</ButtonPrimary>
-      {visible && <AddItems close={() => setVisible(false)} />}
+      <div className="w-1/2">
+        <Search />
+      </div>
+      <div>
+        <ButtonPrimary>Add New</ButtonPrimary>
+        {visible && <AddItems close={() => setVisible(false)} />}
+      </div>
     </div>
   );
 };
