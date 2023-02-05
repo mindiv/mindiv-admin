@@ -12,13 +12,11 @@ const Stats = () => {
   ];
 
   return (
-    <StatsWrap>
-      <CardWrap>
-        {statsData.map((data) => (
-          <StatCard data={data} key={data.name} />
-        ))}
-      </CardWrap>
-    </StatsWrap>
+    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
+      {statsData.map((data) => (
+        <StatCard data={data} key={data.name} />
+      ))}
+    </div>
   );
 };
 
@@ -28,21 +26,15 @@ interface StatsProps {
 
 const StatCard = ({ data }: StatsProps) => {
   return (
-    <Card>
-      <div className="">
-        <div className="card-top">
-          <div className="card-icon">{data.icon}</div>
-        </div>
-        <p className="card-title">{data.name}</p>
-        <h2>
-          <Number number={data.total} />
-        </h2>
-      </div>
-    </Card>
+    <div className="block max-w-sm p-6 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700  text-gray-700 dark:text-gray-200">
+      <div className="text-2xl mb-3">{data.icon}</div>
+      <p className="">{data.name}</p>
+      <h2 className="text-2xl font-semibold">
+        <Number number={data.total} />
+      </h2>
+    </div>
   );
 };
-
-const StatsWrap = styled.div``;
 
 const CardWrap = styled.div`
   display: grid;

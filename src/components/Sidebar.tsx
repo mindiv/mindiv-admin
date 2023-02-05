@@ -1,16 +1,9 @@
 import { Link, NavLink } from 'react-router-dom';
-import {
-  IoLibrary,
-  IoStatsChart,
-  IoSettings,
-  IoLogOut,
-  IoMoon,
-} from 'react-icons/io5';
+import { IoLibrary, IoStatsChart, IoSettings, IoLogOut } from 'react-icons/io5';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { clearAuthTokenFromStorage } from '../features/authSlice';
-import { setThemeMode } from '../features/appSlice';
-import { useState } from 'react';
 import ToggleTheme from './misc/ToggleTheme';
+import { SquareBtn } from './misc/ Button';
 
 const links = [
   { name: 'Dasboard', url: '/', icon: <IoStatsChart /> },
@@ -19,8 +12,14 @@ const links = [
 ];
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
+
+  const onLogout = () => {
+    dispatch(clearAuthTokenFromStorage());
+  };
+
   return (
-    <div className="flex flex-col px-5 py-5 w-64 transition-transform justify-between bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
+    <div className="hidden md:flex flex-col px-5 py-5 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200">
       <div>
         <div className="pb-8 text-2xl">
           <Link to="/">Mindiv Admin</Link>
@@ -47,6 +46,9 @@ const Sidebar = () => {
       </div>
       <div>
         <ToggleTheme />
+        <SquareBtn click={onLogout}>
+          <IoLogOut />
+        </SquareBtn>
       </div>
     </div>
   );

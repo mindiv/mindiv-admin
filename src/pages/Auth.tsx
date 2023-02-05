@@ -62,7 +62,9 @@ const Auth: React.FC = () => {
               type="password"
               placeholder="********"
             />
-            <ButtonPrimary />
+            <ButtonPrimary style={'w-full'} type="submit">
+              Login In
+            </ButtonPrimary>
           </form>
         </div>
       </div>

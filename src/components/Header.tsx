@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BoxShadow } from 'react-shadow-component';
 import styled from 'styled-components';
 import { Button, Container } from '../styles/GlobalStyle';
+import { ButtonPrimary } from './misc/ Button';
 import Search from './Search';
 
 const Header = () => {
@@ -13,15 +14,11 @@ const Header = () => {
   };
 
   return (
-    <HeaderWrap>
-      <Container>
-        <HeaderInner>
-          <Search />
-          <Button onClick={toggleVisibility}>Add New</Button>
-          {visible && <AddItems close={() => setVisible(false)} />}
-        </HeaderInner>
-      </Container>
-    </HeaderWrap>
+    <div className="flex justify-between items-center h-20">
+      <Search />
+      <ButtonPrimary>Add New</ButtonPrimary>
+      {visible && <AddItems close={() => setVisible(false)} />}
+    </div>
   );
 };
 
@@ -42,9 +39,9 @@ const AddItems = ({ close }: AddItemsProps) => {
 
   return (
     <>
-      <Overlay onClick={() => close()} />
-      <BoxShadow shadowStyle="shadow4_1">
-        <AddList>
+      <div onClick={() => close()} />
+      <div>
+        <div>
           {actions.map((action, index) => (
             <Link
               to={action.url}
@@ -54,67 +51,10 @@ const AddItems = ({ close }: AddItemsProps) => {
               New {action.name}
             </Link>
           ))}
-        </AddList>
-      </BoxShadow>
+        </div>
+      </div>
     </>
   );
 };
-
-const HeaderWrap = styled.div`
-  margin-bottom: 30px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-`;
-
-const HeaderInner = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-`;
-
-const Heading = styled.h2`
-  font-size: 25px;
-`;
-
-const AddList = styled.div`
-  position: absolute;
-  z-index: 999;
-  right: 0;
-  top: 50px;
-  background-color: ${(props) => props.theme.colors.background};
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
-  border-radius: 5px;
-  padding: 5px 0;
-  min-width: 200px;
-  border: 1px solid ${(props) => props.theme.colors.borderColor};
-  display: flex;
-  flex-direction: column;
-
-  a {
-    padding: 8px 20px;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.text};
-    font-weight: 600;
-    :hover {
-      background-color: #222;
-      color: #fff;
-    }
-  }
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background-color: transparent;
-  z-index: 99;
-  left: 0;
-  top: 0;
-`;
 
 export default Header;
