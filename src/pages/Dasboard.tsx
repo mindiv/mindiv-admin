@@ -5,11 +5,13 @@ import Sidebar from '../components/Sidebar';
 
 const Dasboard = () => {
   return (
-    <div className="flex  h-screen bg-white dark:bg-gray-900">
+    <div className="flex bg-white dark:bg-gray-900 overflow-auto">
       <Sidebar />
-      <div className="container mx-auto px-4 flex flex-col flex-1">
+      <div className="container mx-auto max-h-full h-screen px-4 flex flex-col flex-1">
         <Header />
-        <Outlet />
+        <div className="">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

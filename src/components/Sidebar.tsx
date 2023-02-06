@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden md:flex flex-col px-5 py-6 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200">
+    <div className="hidden h-screen md:flex flex-col px-5 py-6 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200 overflow-y-auto">
       <div>
         <div className="pb-8 text-2xl">
           <Link to="/">Mindiv Admin</Link>
@@ -29,12 +29,12 @@ const Sidebar = () => {
             <NavLink
               className={({ isActive }) =>
                 (isActive ? 'dark:bg-gray-700 bg-gray-100' : '') +
-                ' flex items-center p-3 text-base text-gray-600 dark:text-gray-200 font-normal rounded-lg hover:text-grey-100 dark:hover:text-gray-400'
+                ' flex items-center p-3 text-base text-gray-700 dark:text-gray-200 font-normal rounded-lg hover:text-grey-100 dark:hover:text-gray-400'
               }
               to={link.url}
               key={index}
             >
-              <span className="mr-5 transition duration-75 text-gray-500 text-lg dark:text-gray-400">
+              <span className="mr-5 transition duration-75 text-gray-700 text-lg dark:text-gray-400">
                 {link.icon}
               </span>
               <span className="link-text">{link.name}</span>
