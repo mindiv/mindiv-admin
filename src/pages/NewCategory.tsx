@@ -4,9 +4,11 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ButtonPrimary } from '../components/misc/ Button';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { CreateCategoryProps } from '../interfaces/category.interface';
-import { createCategory } from '../features/categorySlice';
+import { createCategory, getCategories } from '../features/categorySlice';
+import { getStats } from '../features/statSlice';
+import { HeadingPara } from '../components/misc/Heading';
 
 const schema = yup.object({
   name: yup.string().required('Category name is required'),
@@ -16,6 +18,7 @@ const schema = yup.object({
 
 const NewCategory = () => {
   const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.category);
   const method = useForm<CreateCategoryProps>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -25,22 +28,21 @@ const NewCategory = () => {
 
   const { handleSubmit } = method;
 
-  const onSubmit = (data: CreateCategoryProps) => {
-    dispatch(createCategory(data));
+  const onSubmit = async (data: CreateCategoryProps) => {
+    await dispatch(createCategory(data));
+    await dispatch(getStats());
+    await dispatch(getCategories());
   };
 
   return (
     <div className="lg:w-2/3 xl:w-1/2">
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200">
-          Create a New Category
-        </h1>
-        <p className="text-gray-700 text-md dark:text-gray-200">
-          Fill out the form below with the category name and description to
+      <HeadingPara
+        title="Create a New Category"
+        tag="Fill out the form below with the category name and description to
           quickly add it to the list of available options. Stay organized and
-          streamline content management with this convenient feature.
-        </p>
-      </div>
+          streamline content management with this convenient feature."
+      />
+
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputGroup>
@@ -48,7 +50,9 @@ const NewCategory = () => {
             <CTextarea name="description" label="Description" method={method} />
             <CInput name="cover" label="Cover" method={method} />
           </InputGroup>
-          <ButtonPrimary type="submit">Create category</ButtonPrimary>
+          <ButtonPrimary type="submit">
+            {status == 'loading' ? 'Loading' : 'Create category'}
+          </ButtonPrimary>
         </form>
       </div>
     </div>

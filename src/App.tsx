@@ -5,7 +5,6 @@ import Index from './pages/Index';
 import Resources from './pages/Resources';
 import Auth from './pages/Auth';
 import NewCategory from './pages/NewCategory';
-import NewCollection from './pages/NewCollection';
 import NewQuestion from './pages/NewQuestion';
 import NewUser from './pages/NewUser';
 import { useAppSelector } from './app/hooks';
@@ -44,7 +43,6 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/new/category" element={<NewCategory />} />
-            <Route path="/new/collection" element={<NewCollection />} />
             <Route path="/new/question" element={<NewQuestion />} />
             <Route path="/new/user" element={<NewUser />} />
           </Route>
