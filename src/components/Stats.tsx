@@ -1,14 +1,15 @@
-import React from 'react';
-import { IoChatbubble, IoGrid, IoLayers, IoPeople } from 'react-icons/io5';
+import { IoChatbubble, IoGrid, IoPeople } from 'react-icons/io5';
 import styled from 'styled-components';
+import { useAppSelector } from '../app/hooks';
 import { Heading1 } from './misc/Heading';
 import Number from './misc/Number';
 
 const Stats = () => {
+  const { stats } = useAppSelector((state) => state.stat);
   const statsData = [
-    { name: 'Users', total: 180000, icon: <IoPeople /> },
-    { name: 'Categories', total: 100, icon: <IoGrid /> },
-    { name: 'Questions', total: 823000, icon: <IoChatbubble /> },
+    { name: 'Users', total: stats?.users, icon: <IoPeople /> },
+    { name: 'Categories', total: stats?.categories, icon: <IoGrid /> },
+    { name: 'Questions', total: stats?.questions, icon: <IoChatbubble /> },
   ];
 
   return (

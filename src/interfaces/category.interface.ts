@@ -1,5 +1,5 @@
 export interface CreateCategoryProps {
-  categoryName: string;
+  name: string;
   description: string;
   cover: string;
 }

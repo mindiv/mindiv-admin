@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
+import { useAppDispatch } from '../app/hooks';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { getCategories } from '../features/categorySlice';
+import { getStats } from '../features/statSlice';
 
 const Dasboard = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getStats());
+  }, []);
+
   return (
     <div className="flex bg-white dark:bg-gray-900 overflow-auto">
       <Sidebar />

@@ -9,7 +9,7 @@ import { CreateCategoryProps } from '../interfaces/category.interface';
 import { createCategory } from '../features/categorySlice';
 
 const schema = yup.object({
-  categoryName: yup.string().required('Category name is required'),
+  name: yup.string().required('Category name is required'),
   description: yup.string().required('Description is required'),
   cover: yup.string().url('Invalid url').required('Cover photo is required'),
 });
@@ -19,7 +19,7 @@ const NewCategory = () => {
   const method = useForm<CreateCategoryProps>({
     resolver: yupResolver(schema),
     defaultValues: {
-      categoryName: '',
+      name: '',
     },
   });
 
@@ -44,7 +44,7 @@ const NewCategory = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputGroup>
-            <CInput name="categoryName" label="Category Name" method={method} />
+            <CInput name="name" label="Category Name" method={method} />
             <CTextarea name="description" label="Description" method={method} />
             <CInput name="cover" label="Cover" method={method} />
           </InputGroup>

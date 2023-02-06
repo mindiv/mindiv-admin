@@ -4,14 +4,12 @@ import { BASE_URL } from '../utils/constants';
 import { getFromLS, setToLS } from '../utils/storage';
 
 type AuthState = {
-  user: any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   isAuth: boolean;
   errors: unknown;
 };
 
 const initialState: AuthState = {
-  user: null,
   status: 'idle',
   isAuth: false,
   errors: null,
@@ -58,7 +56,6 @@ const authSlice = createSlice({
           action: PayloadAction<{ accessToken: string; refreshToken: string }>
         ) => {
           state.status = 'succeeded';
-          state.user = action.payload;
           setToLS('access-token', action.payload.accessToken);
           setToLS('refresh-token', action.payload.refreshToken);
           location.reload();
