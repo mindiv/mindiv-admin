@@ -1,25 +1,22 @@
-import React from 'react';
 import { CInput, CTextarea } from '../components/misc/Input';
-import {
-  Button,
-  InputGroup,
-  PageContent,
-  PageWrap,
-} from '../styles/GlobalStyle';
+import { InputGroup } from '../styles/GlobalStyle';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import PageHeading from '../components/misc/PageHeading';
 import { ButtonPrimary } from '../components/misc/ Button';
+import { useAppDispatch } from '../app/hooks';
+import { CreateCategoryProps } from '../interfaces/category.interface';
+import { createCategory } from '../features/categorySlice';
 
 const schema = yup.object({
   categoryName: yup.string().required('Category name is required'),
   description: yup.string().required('Description is required'),
-  cover: yup.string().required('Cover photo is required'),
+  cover: yup.string().url('Invalid url').required('Cover photo is required'),
 });
 
 const NewCategory = () => {
-  const method = useForm({
+  const dispatch = useAppDispatch();
+  const method = useForm<CreateCategoryProps>({
     resolver: yupResolver(schema),
     defaultValues: {
       categoryName: '',
@@ -28,12 +25,12 @@ const NewCategory = () => {
 
   const { handleSubmit } = method;
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = (data: CreateCategoryProps) => {
+    dispatch(createCategory(data));
   };
 
   return (
-    <div className="w-1/2">
+    <div className="lg:w-2/3 xl:w-1/2">
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-gray-700 dark:text-gray-200">
           Create a New Category
@@ -49,8 +46,9 @@ const NewCategory = () => {
           <InputGroup>
             <CInput name="categoryName" label="Category Name" method={method} />
             <CTextarea name="description" label="Description" method={method} />
+            <CInput name="cover" label="Cover" method={method} />
           </InputGroup>
-          <ButtonPrimary>Create category</ButtonPrimary>
+          <ButtonPrimary type="submit">Create category</ButtonPrimary>
         </form>
       </div>
     </div>

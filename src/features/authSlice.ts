@@ -34,7 +34,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     getAuthTokenFromStorage(state) {
-      const token = getFromLS('token')?.accessToken;
+      const token = getFromLS('access-token');
       if (token) {
         state.isAuth = true;
       } else {
@@ -59,7 +59,8 @@ const authSlice = createSlice({
         ) => {
           state.status = 'succeeded';
           state.user = action.payload;
-          setToLS('token', action.payload);
+          setToLS('access-token', action.payload.accessToken);
+          setToLS('refresh-token', action.payload.refreshToken);
           location.reload();
         }
       )
@@ -67,7 +68,6 @@ const authSlice = createSlice({
         authenticateAdmin.rejected,
         (state, action: PayloadAction<unknown>) => {
           state.status = 'failed';
-          console.log('LOL', action.payload);
           state.errors = action;
         }
       );
