@@ -6,16 +6,18 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateQuestionProps } from '../interfaces/question.interface';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { modData } from '../utils/mod';
 
 const schema = yup.object({
-  name: yup.string().required('Category name is required'),
+  question: yup.string().required('Question is required'),
   description: yup.string().required('Description is required'),
-  cover: yup.string().url('Invalid url').required('Cover photo is required'),
+  category: yup.string().required('Category is required'),
 });
 
 const NewQuestion = () => {
   const dispatch = useAppDispatch();
+  const { categories, status } = useAppSelector((state) => state.category);
   const method = useForm<CreateQuestionProps>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -39,12 +41,18 @@ const NewQuestion = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputGroup>
-            <CInput name="name" label="Category Name" method={method} />
+            <CInput name="question" label="Question" method={method} />
             <CTextarea name="description" label="Description" method={method} />
-            <CInput name="cover" label="Cover" method={method} />
-            <CSelect name="category" label="Categories" method={method} />
+            <CSelect
+              name="category"
+              label="Categories"
+              method={method}
+              options={modData(categories)}
+            />
           </InputGroup>
-          <ButtonPrimary type="submit">Create Question</ButtonPrimary>
+          <ButtonPrimary type="submit">
+            {status === 'loading' ? 'Loading...' : 'Create Question'}
+          </ButtonPrimary>
         </form>
       </div>
     </div>

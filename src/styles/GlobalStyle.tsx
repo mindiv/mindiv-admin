@@ -53,8 +53,6 @@ export const InputWrap = styled.div`
   }
 `;
 
-export const Heading1 = styled.h1``;
-
 export const Button = styled.button`
   border: none;
   outline: none;
@@ -71,5 +69,3 @@ export const PageWrap = styled.div`
   max-width: 600px;
   margin: 0 auto;
 `;
-
-export const PageContent = styled.div``;
