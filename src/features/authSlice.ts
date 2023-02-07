@@ -40,7 +40,8 @@ const authSlice = createSlice({
       }
     },
     clearAuthTokenFromStorage() {
-      localStorage.removeItem('token');
+      localStorage.removeItem('access-token');
+      localStorage.removeItem('refresh-token');
       location.reload();
     },
   },
