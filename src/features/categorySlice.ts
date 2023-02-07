@@ -66,14 +66,7 @@ const categorySlice = createSlice({
       .addCase(getCategories.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded';
         state.categories = action.payload.payload;
-      })
-      .addCase(
-        getCategories.rejected,
-        (state, action: PayloadAction<unknown>) => {
-          state.status = 'failed';
-          state.error = action;
-        }
-      );
+      });
   },
 });
 

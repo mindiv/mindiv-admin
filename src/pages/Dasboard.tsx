@@ -15,9 +15,9 @@ const Dasboard = () => {
   }, []);
 
   return (
-    <div className="flex bg-white dark:bg-gray-900 overflow-auto">
+    <div className="flex bg-white dark:bg-gray-900 overflow-hidden">
       <Sidebar />
-      <div className="container mx-auto max-h-full h-screen px-4 flex flex-col flex-1">
+      <div className="container mx-auto max-h-full h-screen px-4 flex flex-col flex-1 overflow-y-auto">
         <Header />
         <div className="">
           <Outlet />
