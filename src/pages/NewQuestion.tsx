@@ -20,9 +20,6 @@ const NewQuestion = () => {
   const { categories, status } = useAppSelector((state) => state.category);
   const method = useForm<CreateQuestionProps>({
     resolver: yupResolver(schema),
-    defaultValues: {
-      name: '',
-    },
   });
 
   const { handleSubmit } = method;

@@ -64,7 +64,6 @@ const categorySlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getCategories.fulfilled, (state, action: PayloadAction<any>) => {
-        console.log(action.payload);
         state.status = 'succeeded';
         state.categories = action.payload.payload;
       })
