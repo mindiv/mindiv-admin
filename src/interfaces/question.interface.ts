@@ -7,4 +7,5 @@ export interface CreateQuestionProps {
   description: string;
   difficulty: 'easy' | 'medium' | 'hard';
   category: string;
+  answer: string;
 }

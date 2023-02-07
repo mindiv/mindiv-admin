@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="hidden h-screen md:flex flex-col px-5 py-6 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200 overflow-y-auto">
+    <div className="hidden fixed left-0 h-screen md:flex flex-col px-5 py-6 w-64 transition-transform justify-between bg-white dark:bg-gray-900 dark:text-gray-200 overflow-y-auto">
       <div>
         <div className="pb-8 text-2xl">
           <Link to="/">Mindiv Admin</Link>

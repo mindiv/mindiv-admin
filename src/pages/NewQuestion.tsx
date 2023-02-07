@@ -36,11 +36,12 @@ const NewQuestion = () => {
       description: data.description,
       options,
       category: data.category,
+      answer: data.answer,
     };
     console.log(payload);
   };
   return (
-    <div className="lg:w-2/3 xl:w-1/2">
+    <div className="lg:w-2/3 xl:w-1/2 mb-20">
       <HeadingPara
         title="Create a New Question"
         tag="Fill out the form below with the question name, description and the category to

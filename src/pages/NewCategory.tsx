@@ -35,7 +35,7 @@ const NewCategory = () => {
   };
 
   return (
-    <div className="lg:w-2/3 xl:w-1/2">
+    <div className="lg:w-2/3 xl:w-1/2 mb-20">
       <HeadingPara
         title="Create a New Category"
         tag="Fill out the form below with the category name and description to
