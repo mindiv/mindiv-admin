@@ -1,22 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
 
 interface ErrorTextProps {
   text: string | any;
 }
 const ErrorText = ({ text }: ErrorTextProps) => {
   return (
-    <ErrorTextWrap>
+    <div className="text-red-400 ml-3 text-sm">
       <span>{text}</span>
-    </ErrorTextWrap>
+    </div>
   );
 };
-
-const ErrorTextWrap = styled.div`
-  display: flex;
-  font-size: 14px;
-  color: #ff0000;
-  padding: 3px;
-`;
 
 export default ErrorText;

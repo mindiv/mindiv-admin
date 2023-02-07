@@ -1,120 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BoxShadow } from 'react-shadow-component';
-import styled from 'styled-components';
-import { Button, Container } from '../styles/GlobalStyle';
+import { ButtonPrimary } from './misc/ Button';
 import Search from './Search';
 
 const Header = () => {
-  const [visible, setVisible] = useState(false);
-
-  const toggleVisibility = () => {
-    setVisible(!visible);
-  };
-
   return (
-    <HeaderWrap>
-      <Container>
-        <HeaderInner>
-          <Search />
-          <Button onClick={toggleVisibility}>Add New</Button>
-          {visible && <AddItems close={() => setVisible(false)} />}
-        </HeaderInner>
-      </Container>
-    </HeaderWrap>
+    <div className="flex justify-between relative items-center py-5 mb-5">
+      <div className="w-1/2">
+        <Search />
+      </div>
+      <Dropdown />
+    </div>
   );
 };
 
-interface AddItemsProps {
-  close: Function;
-}
-
-const AddItems = ({ close }: AddItemsProps) => {
+const Dropdown = () => {
   const actions = [
     { name: 'Category', url: '/new/category' },
-    { name: 'Collection', url: '/new/collection' },
     { name: 'Question', url: '/new/question' },
     { name: 'User', url: '/new/user' },
   ];
-  const handleAction = (action: string) => {
-    close();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
   };
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <>
-      <Overlay onClick={() => close()} />
-      <BoxShadow shadowStyle="shadow4_1">
-        <AddList>
-          {actions.map((action, index) => (
-            <Link
-              to={action.url}
-              key={index}
-              onClick={() => handleAction(action.name)}
+    <div ref={dropdownRef}>
+      <ButtonPrimary click={() => setIsOpen(!isOpen)}>Add New</ButtonPrimary>
+      {isOpen && (
+        <div className="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 dark:divide-gray-600">
+          <ul
+            className="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownDividerButton"
+          >
+            {actions.map((action, index) => (
+              <li key={index}>
+                <Link
+                  to={action.url}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  New {action.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="py-2">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >
-              New {action.name}
-            </Link>
-          ))}
-        </AddList>
-      </BoxShadow>
-    </>
+              Separated link
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
-
-const HeaderWrap = styled.div`
-  margin-bottom: 30px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-`;
-
-const HeaderInner = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-`;
-
-const Heading = styled.h2`
-  font-size: 25px;
-`;
-
-const AddList = styled.div`
-  position: absolute;
-  z-index: 999;
-  right: 0;
-  top: 50px;
-  background-color: ${(props) => props.theme.colors.background};
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
-  border-radius: 5px;
-  padding: 5px 0;
-  min-width: 200px;
-  border: 1px solid ${(props) => props.theme.colors.borderColor};
-  display: flex;
-  flex-direction: column;
-
-  a {
-    padding: 8px 20px;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.text};
-    font-weight: 600;
-    :hover {
-      background-color: #222;
-      color: #fff;
-    }
-  }
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background-color: transparent;
-  z-index: 99;
-  left: 0;
-  top: 0;
-`;
 
 export default Header;

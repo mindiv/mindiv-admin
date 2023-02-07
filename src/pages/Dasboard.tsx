@@ -1,35 +1,30 @@
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
+import { useAppDispatch } from '../app/hooks';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { Container } from '../styles/GlobalStyle';
+import { getCategories } from '../features/categorySlice';
+import { getStats } from '../features/statSlice';
 
 const Dasboard = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getStats());
+  }, []);
+
   return (
-    <Wrap>
+    <div className="flex bg-white dark:bg-gray-900 overflow-auto">
       <Sidebar />
-      <Main>
+      <div className="container mx-auto max-h-full h-screen px-4 flex flex-col flex-1">
         <Header />
-        <Container>
+        <div className="">
           <Outlet />
-        </Container>
-      </Main>
-    </Wrap>
+        </div>
+      </div>
+    </div>
   );
 };
-
-const Wrap = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  background-color: ${(props) => props.theme.colors.background};
-`;
-
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-`;
 
 export default Dasboard;

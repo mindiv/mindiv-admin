@@ -1,24 +1,26 @@
-import React from 'react';
-import { IoChatbubble, IoGrid, IoLayers, IoPeople } from 'react-icons/io5';
+import { IoChatbubble, IoGrid, IoPeople } from 'react-icons/io5';
 import styled from 'styled-components';
+import { useAppSelector } from '../app/hooks';
+import { Heading1 } from './misc/Heading';
 import Number from './misc/Number';
 
 const Stats = () => {
+  const { stats } = useAppSelector((state) => state.stat);
   const statsData = [
-    { name: 'Users', total: 18000000, icon: <IoPeople /> },
-    { name: 'Categories', total: 100, icon: <IoGrid /> },
-    { name: 'Collections', total: 980, icon: <IoLayers /> },
-    { name: 'Questions', total: 823000, icon: <IoChatbubble /> },
+    { name: 'Users', total: stats?.users, icon: <IoPeople /> },
+    { name: 'Categories', total: stats?.categories, icon: <IoGrid /> },
+    { name: 'Questions', total: stats?.questions, icon: <IoChatbubble /> },
   ];
 
   return (
-    <StatsWrap>
-      <CardWrap>
+    <div>
+      <Heading1 text="Statistics" />
+      <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
         {statsData.map((data) => (
           <StatCard data={data} key={data.name} />
         ))}
-      </CardWrap>
-    </StatsWrap>
+      </div>
+    </div>
   );
 };
 
@@ -28,21 +30,15 @@ interface StatsProps {
 
 const StatCard = ({ data }: StatsProps) => {
   return (
-    <Card>
-      <div className="">
-        <div className="card-top">
-          <div className="card-icon">{data.icon}</div>
-        </div>
-        <p className="card-title">{data.name}</p>
-        <h2>
-          <Number number={data.total} />
-        </h2>
-      </div>
-    </Card>
+    <div className="block  max-w-sm p-6 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700  text-gray-700 dark:text-gray-200">
+      <div className="text-2xl mb-3">{data.icon}</div>
+      <p className="">{data.name}</p>
+      <h2 className="text-2xl font-semibold">
+        <Number number={data.total} />
+      </h2>
+    </div>
   );
 };
-
-const StatsWrap = styled.div``;
 
 const CardWrap = styled.div`
   display: grid;

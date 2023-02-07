@@ -1,60 +1,61 @@
-import React from 'react';
 import { CInput, CTextarea } from '../components/misc/Input';
-import {
-  Button,
-  InputGroup,
-  PageContent,
-  PageWrap,
-} from '../styles/GlobalStyle';
+import { InputGroup } from '../styles/GlobalStyle';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import PageHeading from '../components/misc/PageHeading';
+import { ButtonPrimary } from '../components/misc/ Button';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { CreateCategoryProps } from '../interfaces/category.interface';
+import { createCategory, getCategories } from '../features/categorySlice';
+import { getStats } from '../features/statSlice';
+import { HeadingPara } from '../components/misc/Heading';
 
 const schema = yup.object({
-  categoryName: yup.string().required('Category name is required'),
+  name: yup.string().required('Category name is required'),
   description: yup.string().required('Description is required'),
-  cover: yup.string().required('Cover photo is required'),
+  cover: yup.string().url('Invalid url').required('Cover photo is required'),
 });
 
 const NewCategory = () => {
-  const method = useForm({
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.category);
+  const method = useForm<CreateCategoryProps>({
     resolver: yupResolver(schema),
     defaultValues: {
-      categoryName: '',
+      name: '',
     },
   });
 
   const { handleSubmit } = method;
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: CreateCategoryProps) => {
+    await dispatch(createCategory(data));
+    await dispatch(getStats());
+    await dispatch(getCategories());
   };
 
   return (
-    <>
-      <PageWrap>
-        <PageHeading title="New Category" tag="Create new category " />
-        <PageContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup>
-              <CInput
-                name="categoryName"
-                label="Category Name"
-                method={method}
-              />
-              <CTextarea
-                name="description"
-                label="Description"
-                method={method}
-              />
-              <CInput name="cover" label="Cover Photo" method={method} />
-            </InputGroup>
-            <Button>Create category</Button>
-          </form>
-        </PageContent>
-      </PageWrap>
-    </>
+    <div className="lg:w-2/3 xl:w-1/2">
+      <HeadingPara
+        title="Create a New Category"
+        tag="Fill out the form below with the category name and description to
+          quickly add it to the list of available options. Stay organized and
+          streamline content management with this convenient feature."
+      />
+
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <InputGroup>
+            <CInput name="name" label="Category Name" method={method} />
+            <CTextarea name="description" label="Description" method={method} />
+            <CInput name="cover" label="Cover" method={method} />
+          </InputGroup>
+          <ButtonPrimary type="submit">
+            {status == 'loading' ? 'Loading' : 'Create category'}
+          </ButtonPrimary>
+        </form>
+      </div>
+    </div>
   );
 };
 

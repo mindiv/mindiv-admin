@@ -1,14 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 import { CInput } from '../components/misc/Input';
 import * as yup from 'yup';
-import { Button, InputGroup } from '../styles/GlobalStyle';
-import { BoxShadow } from 'react-shadow-component';
 import { authenticateAdmin } from '../features/authSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { toast } from 'react-toastify';
+import { ButtonPrimary } from '../components/misc/ Button';
 
 const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,82 +39,37 @@ const Auth: React.FC = () => {
   }, [status]);
 
   return (
-    <AuthWrap>
-      <Backdrop />
-      <Hello>
-        <h1>Admin Login</h1>
-        <p>Welcome back! Please enter your details</p>
-      </Hello>
-      <BoxShadow shadowStyle="shadow4_1">
-        <LoginCard>
+    <div className="dark:bg-gray-900  h-screen flex flex-col justify-center items-center p-3 md:p-0">
+      <h1 className="mb-2 font-bold text-4xl text-gray-900 dark:text-white sm:text-5xl">
+        Admin Login
+      </h1>
+      <p className="mb-2 font-normal text-gray-700 dark:text-gray-400">
+        Welcome back! Please enter your details
+      </p>
+      <div className="w-full md:mt-0 sm:max-w-md bg-white dark:bg-gray-800 border shadow border-gray-200 dark:border-gray-700 rounded-lg">
+        <div className="p-5">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup>
-              <CInput name="email" label="Email" method={method} />
-              <CInput
-                name="password"
-                label="Password"
-                method={method}
-                type="password"
-              />
-            </InputGroup>
-            <ButtonWrap>
-              <Button>{'Login'}</Button>
-            </ButtonWrap>
+            <CInput
+              name="email"
+              label="Email"
+              method={method}
+              placeholder="example@mindiv.app"
+            />
+            <CInput
+              name="password"
+              label="Password"
+              method={method}
+              type="password"
+              placeholder="********"
+            />
+            <ButtonPrimary style={'w-full'} type="submit">
+              Login In
+            </ButtonPrimary>
           </form>
-        </LoginCard>
-      </BoxShadow>
-    </AuthWrap>
+        </div>
+      </div>
+    </div>
   );
 };
 
-const AuthWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.colors.background};
-`;
-const Backdrop = styled.div`
-  position: fixed;
-  display: flex;
-  width: 100%;
-  height: 50vh;
-  background-color: ${(props) => props.theme.colors.borderColor};
-  top: 0;
-  left: 0;
-`;
-const LoginCard = styled.div`
-  position: relative;
-  background-color: ${(props) => props.theme.colors.background};
-  border-radius: 8px;
-  padding: 30px;
-  width: 350px;
-  border: 1px solid ${(props) => props.theme.colors.borderColor};
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  width: 100%;
-
-  button {
-    width: 100%;
-  }
-`;
-
-const Hello = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 40px;
-  color: ${(props) => props.theme.colors.text};
-
-  h1 {
-    font-size: 50px;
-  }
-`;
 export default Auth;
