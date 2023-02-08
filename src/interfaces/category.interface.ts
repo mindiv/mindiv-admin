@@ -3,3 +3,10 @@ export interface CreateCategoryProps {
   description: string;
   cover: string;
 }
+
+export interface CategoryData {
+  _id: string;
+  name: string;
+  description: string;
+  questionCount: number;
+}

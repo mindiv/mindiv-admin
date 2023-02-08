@@ -18,3 +18,10 @@ export interface QuestionPostPayload {
   difficulty: string;
   category: string;
 }
+
+export interface QuestionData {
+  question: string;
+  answer: string;
+  options: string[];
+  difficulty: string;
+}

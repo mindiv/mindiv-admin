@@ -4,6 +4,7 @@ import { useAppDispatch } from '../app/hooks';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { getCategories } from '../features/categorySlice';
+import { getQuestions } from '../features/questionSlice';
 import { getStats } from '../features/statSlice';
 
 const Dasboard = () => {
@@ -11,6 +12,7 @@ const Dasboard = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getQuestions());
     dispatch(getStats());
   }, []);
 

@@ -50,7 +50,7 @@ const questionSlice = createSlice({
       })
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded';
-        state.questions = action.payload;
+        state.questions = action.payload.payload;
       })
       .addCase(
         getQuestions.rejected,
