@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface TabsProps {
   tabs: { name: string; alias: string }[];
@@ -8,6 +8,18 @@ interface TabsProps {
 }
 
 const Tabs = ({ tabs, activeTab, setActiveTab }: TabsProps) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const param = searchParams.get('tab');
+
+  useEffect(() => {
+    if (tabs.some((tab) => tab.alias === param)) {
+      setActiveTab(param);
+    } else {
+      setActiveTab(tabs[0].alias);
+    }
+  }, [param]);
+
   return (
     <div className="mb-10">
       <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">

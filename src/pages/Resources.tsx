@@ -11,19 +11,12 @@ const tabs = [
 ];
 
 const Resources = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const tab = searchParams.get('tab');
-
   const [activeTab, setActiveTab] = useState<string>('categories');
 
-  useEffect(() => {
-    setActiveTab(tab || 'categories');
-  }, [tab]);
   return (
     <div>
       <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-      {tab === 'categories' && <CategoryList />}
+      {activeTab === 'categories' && <CategoryList />}
     </div>
   );
 };
