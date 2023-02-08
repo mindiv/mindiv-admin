@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Tabs from '../components/Tabs';
 
 const tabs = [
@@ -9,7 +10,15 @@ const tabs = [
 ];
 
 const Resources = () => {
-  const [activeTab, setActiveTab] = useState('categories');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const tab = searchParams.get('tab');
+
+  const [activeTab, setActiveTab] = useState<string>('categories');
+
+  useEffect(() => {
+    setActiveTab(tab || 'categories');
+  }, [tab]);
   return (
     <div>
       <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
