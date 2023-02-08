@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CategoryList from '../components/CategoryList';
+import QuestionList from '../components/QuestionList';
 import Tabs from '../components/Tabs';
 
 const tabs = [
@@ -17,6 +18,7 @@ const Resources = () => {
     <div>
       <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'categories' && <CategoryList />}
+      {activeTab === 'questions' && <QuestionList />}
     </div>
   );
 };

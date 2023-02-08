@@ -20,6 +20,7 @@ export interface QuestionPostPayload {
 }
 
 export interface QuestionData {
+  _id: string;
   question: string;
   answer: string;
   options: string[];
