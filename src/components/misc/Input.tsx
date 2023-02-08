@@ -1,23 +1,21 @@
 import ErrorText from './ErrorText';
 
+interface OptionTypes {
+  value: string;
+  label: string;
+}
+
 interface CProps {
   method: any;
   name: string;
   label: string;
   placeholder?: string;
   type?: string;
-  rest?: any;
-  options?: [{ value: string; label: string }];
+  options?: OptionTypes[];
 }
 
 // Custom input
-export const CInput = ({
-  method,
-  name,
-  label,
-  type = 'text',
-  ...rest
-}: CProps) => {
+export const CInput = ({ method, name, label, type = 'text' }: CProps) => {
   const {
     register,
     formState: { errors },
@@ -29,7 +27,7 @@ export const CInput = ({
       </label>
       <input
         type={type}
-        {...rest}
+        autoComplete="off"
         {...register(`${name}`)}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-1 outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
@@ -59,7 +57,7 @@ export const CTextarea = ({ method, name, label }: CProps) => {
 };
 
 // Custom select
-export const CSelect = ({ method, name, label, options, rest }: CProps) => {
+export const CSelect = ({ method, name, label, options }: CProps) => {
   const {
     register,
     formState: { errors },
@@ -73,7 +71,6 @@ export const CSelect = ({ method, name, label, options, rest }: CProps) => {
         {...register(`${name}`)}
         id="countries"
         className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-1 outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        {...rest}
       >
         <option className="text-gray-500"></option>
         {options?.map((option) => (

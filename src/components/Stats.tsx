@@ -1,5 +1,4 @@
 import { IoChatbubble, IoGrid, IoPeople } from 'react-icons/io5';
-import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
 import { Heading1 } from './misc/Heading';
 import Number from './misc/Number';
@@ -13,7 +12,7 @@ const Stats = () => {
   ];
 
   return (
-    <div>
+    <div className="mb-20">
       <Heading1 text="Statistics" />
       <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
         {statsData.map((data) => (

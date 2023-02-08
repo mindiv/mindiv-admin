@@ -9,3 +9,12 @@ export interface CreateQuestionProps {
   category: string;
   answer: string;
 }
+
+export interface QuestionPostPayload {
+  question: string;
+  answer: string;
+  options: string[];
+  description: string;
+  difficulty: string;
+  category: string;
+}

@@ -26,10 +26,11 @@ const NewCategory = () => {
     },
   });
 
-  const { handleSubmit } = method;
+  const { handleSubmit, reset } = method;
 
   const onSubmit = async (data: CreateCategoryProps) => {
     await dispatch(createCategory(data));
+    reset();
     await dispatch(getStats());
     await dispatch(getCategories());
   };
@@ -50,7 +51,7 @@ const NewCategory = () => {
             <CTextarea name="description" label="Description" method={method} />
             <CInput name="cover" label="Cover" method={method} />
           </InputGroup>
-          <ButtonPrimary type="submit">
+          <ButtonPrimary type="submit" disabled={status === 'loading'}>
             {status == 'loading' ? 'Loading' : 'Create category'}
           </ButtonPrimary>
         </form>
