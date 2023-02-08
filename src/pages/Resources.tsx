@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import CategoryList from '../components/CategoryList';
 import Tabs from '../components/Tabs';
 
 const tabs = [
@@ -22,6 +23,7 @@ const Resources = () => {
   return (
     <div>
       <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+      {tab === 'categories' && <CategoryList />}
     </div>
   );
 };
