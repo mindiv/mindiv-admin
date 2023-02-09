@@ -42,7 +42,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-500 rounded-lg p-4 shadow-xl">
+      <div className="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
         <div className="flex flex-col justify-center items-center mb-5 text-gray-700 dark:text-gray-200">
           <div className="w-20 h-20 bg-gray-300 rounded-full mb-3"></div>
           <h3 className="text-lg font-semibold">Jerry Nwosu</h3>

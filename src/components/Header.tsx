@@ -45,7 +45,7 @@ const Dropdown = () => {
     <div ref={dropdownRef}>
       <ButtonPrimary click={() => setIsOpen(!isOpen)}>Add New</ButtonPrimary>
       {isOpen && (
-        <div className="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <div className="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded shadow-lg w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul
             className="py-2 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownDividerButton"

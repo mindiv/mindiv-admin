@@ -29,7 +29,7 @@ interface StatsProps {
 
 const StatCard = ({ data }: StatsProps) => {
   return (
-    <div className="block  max-w-sm p-6 bg-gray-100 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700  text-gray-700 dark:text-gray-200">
+    <div className="block  max-w-sm p-6 bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700  text-gray-700 dark:text-gray-200">
       <div className="text-2xl mb-3">{data.icon}</div>
       <p className="">{data.name}</p>
       <h2 className="text-2xl font-semibold">
