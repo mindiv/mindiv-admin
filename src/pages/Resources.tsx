@@ -15,7 +15,7 @@ const Resources = () => {
   const [activeTab, setActiveTab] = useState<string>('categories');
 
   return (
-    <div>
+    <div className="mb-10">
       <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'categories' && <CategoryList />}
       {activeTab === 'questions' && <QuestionList />}

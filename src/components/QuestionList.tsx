@@ -16,7 +16,7 @@ const QuestionList = () => {
   return (
     <div className="grid lg:grid-cols-2 gap-3">
       {data.map((question, index) => (
-        <Question question={question} index={index} />
+        <Question question={question} key={question._id} />
       ))}
     </div>
   );
@@ -24,13 +24,12 @@ const QuestionList = () => {
 
 interface QuestionProps {
   question: QuestionData;
-  index: any;
 }
 
-const Question = ({ question, index }: QuestionProps) => {
+const Question = ({ question }: QuestionProps) => {
   return (
     <div className="bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-700">
-      <div key={index} className="cursor-pointer mb-5 p-4">
+      <div className="cursor-pointer mb-5 p-4">
         <p className="mb-3">{question.question}</p>
         <Options options={question.options} answer={question.answer} />
       </div>

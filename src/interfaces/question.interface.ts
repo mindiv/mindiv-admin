@@ -24,5 +24,7 @@ export interface QuestionData {
   question: string;
   answer: string;
   options: string[];
-  difficulty: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  category: string;
+  description: string;
 }

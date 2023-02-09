@@ -8,7 +8,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateQuestionProps } from '../interfaces/question.interface';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { modData } from '../utils/mod';
-import { createQuestion, getQuestions } from '../features/questionSlice';
+import {
+  createQuestion,
+  getQuestion,
+  getQuestions,
+  updateQuestion,
+} from '../features/questionSlice';
 import { getStats } from '../features/statSlice';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -20,6 +25,7 @@ const schema = yup.object({
   option3: yup.string().required('Option 3 is required'),
   option4: yup.string().required('Option 4 is required'),
   answer: yup.string().required('Answer is required'),
+  difficulty: yup.string().required(),
   description: yup.string(),
   category: yup.string().required('Category is required'),
 });
@@ -32,9 +38,9 @@ const difficulties = [
 
 const AddEditQuestion = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { id = '' } = useParams();
   const { categories } = useAppSelector((state) => state.category);
-  const { status } = useAppSelector((state) => state.question);
+  const { status, question } = useAppSelector((state) => state.question);
   const [mode, setMode] = useState<string>('new');
   const method = useForm<CreateQuestionProps>({
     resolver: yupResolver(schema),
@@ -44,10 +50,26 @@ const AddEditQuestion = () => {
 
   useEffect(() => {
     if (id) {
-      console.log('here');
       setMode('edit');
+      dispatch(getQuestion(id));
     }
   }, [id]);
+
+  useEffect(() => {
+    if (mode === 'edit' && question) {
+      reset({
+        question: question.question,
+        answer: question.answer,
+        option1: question.options[0],
+        option2: question.options[1],
+        option3: question.options[2],
+        option4: question.options[3],
+        category: question.category,
+        difficulty: question.difficulty,
+        description: question.description,
+      });
+    }
+  }, [question, mode]);
 
   const onSubmit = async (data: CreateQuestionProps) => {
     const options = [data.option1, data.option2, data.option3, data.option4];
@@ -59,11 +81,17 @@ const AddEditQuestion = () => {
       answer: data.answer,
       difficulty: data.difficulty,
     };
-    await dispatch(createQuestion(payload));
+
+    if (mode === 'new') {
+      await dispatch(createQuestion(payload));
+    } else {
+      await dispatch(updateQuestion({ id, payload }));
+    }
     reset();
     await dispatch(getQuestions());
     await dispatch(getStats());
   };
+
   return (
     <div className="lg:w-2/3 xl:w-1/2 mb-20">
       <HeadingPara
