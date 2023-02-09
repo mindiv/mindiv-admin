@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { modData } from '../utils/mod';
 import { createQuestion, getQuestions } from '../features/questionSlice';
 import { getStats } from '../features/statSlice';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const schema = yup.object({
   question: yup.string().required('Question is required'),
@@ -30,13 +32,22 @@ const difficulties = [
 
 const AddEditQuestion = () => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
   const { categories } = useAppSelector((state) => state.category);
   const { status } = useAppSelector((state) => state.question);
+  const [mode, setMode] = useState<string>('new');
   const method = useForm<CreateQuestionProps>({
     resolver: yupResolver(schema),
   });
 
   const { handleSubmit, reset } = method;
+
+  useEffect(() => {
+    if (id) {
+      console.log('here');
+      setMode('edit');
+    }
+  }, [id]);
 
   const onSubmit = async (data: CreateQuestionProps) => {
     const options = [data.option1, data.option2, data.option3, data.option4];
@@ -56,7 +67,7 @@ const AddEditQuestion = () => {
   return (
     <div className="lg:w-2/3 xl:w-1/2 mb-20">
       <HeadingPara
-        title="Create a New Question"
+        title={mode === 'new' ? 'Create a New Question' : 'Update Question'}
         tag="Fill out the form below with the question name, description and the category to
           quickly add it to the list of available questions. Stay organized and
           streamline content management with this convenient feature."

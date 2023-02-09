@@ -49,6 +49,7 @@ function App() {
             </Route>
             <Route path="/question">
               <Route path="new" element={<AddEditQuestion />} />
+              <Route path=":id/edit" element={<AddEditQuestion />} />
             </Route>
 
             <Route path="/user">

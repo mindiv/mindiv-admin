@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IoPencil, IoTrash } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { QuestionData } from '../interfaces/question.interface';
 import { SquareBtn } from './misc/ Button';
@@ -64,8 +65,9 @@ const Options = ({
 };
 
 const CardFooter = ({ id }: { id: string }) => {
+  const navigate = useNavigate();
   const onEditQuestion = () => {
-    //
+    navigate(`/question/${id}/edit`);
   };
 
   const onDeleteQuestion = () => {
@@ -73,7 +75,7 @@ const CardFooter = ({ id }: { id: string }) => {
   };
   return (
     <div className="flex justify-end gap-3 p-2">
-      <SquareBtn>
+      <SquareBtn click={onEditQuestion} title="Edit Question">
         <IoPencil />
       </SquareBtn>
       <SquareBtn>

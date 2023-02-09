@@ -27,9 +27,10 @@ export const ButtonPrimary = ({
   );
 };
 
-export const SquareBtn = ({ children, click }: any) => {
+export const SquareBtn = ({ children, click, title }: any) => {
   return (
     <button
+      title={title}
       id="theme-toggle"
       onClick={() => click()}
       type="button"
