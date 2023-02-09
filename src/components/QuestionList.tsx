@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { IoEllipsisVertical } from 'react-icons/io5';
+import { IoPencil, IoTrash } from 'react-icons/io5';
 import { useAppSelector } from '../app/hooks';
 import { QuestionData } from '../interfaces/question.interface';
-import Dropdown from './Dropdown';
 import { SquareBtn } from './misc/ Button';
 
 const QuestionList = () => {
@@ -12,6 +11,7 @@ const QuestionList = () => {
   useEffect(() => {
     setData(questions);
   }, [questions]);
+
   return (
     <div className="grid lg:grid-cols-2 gap-3">
       {data.map((question, index) => (
@@ -21,26 +21,19 @@ const QuestionList = () => {
   );
 };
 
-const Question = ({ question, index }: any) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+interface QuestionProps {
+  question: QuestionData;
+  index: any;
+}
+
+const Question = ({ question, index }: QuestionProps) => {
   return (
-    <div
-      onMouseEnter={() => setShowMenu(true)}
-      onMouseLeave={() => setShowMenu(false)}
-      key={index}
-      className="relative bg-gray-100 p-4 rounded-lg cursor-pointer text-gray-700 dark:bg-gray-800 dark:text-gray-200"
-    >
-      {showMenu && (
-        <div className="absolute right-3 top-2">
-          <SquareBtn click={() => setShowDropdown(!showDropdown)}>
-            <IoEllipsisVertical />
-          </SquareBtn>
-        </div>
-      )}
-      <p className="mb-3">{question.question}</p>
-      <Options options={question.options} answer={question.answer} />
-      {showDropdown && <Dropdown />}
+    <div className="bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-700">
+      <div key={index} className="cursor-pointer mb-5 p-4">
+        <p className="mb-3">{question.question}</p>
+        <Options options={question.options} answer={question.answer} />
+      </div>
+      <CardFooter id={question._id} />
     </div>
   );
 };
@@ -57,15 +50,35 @@ const Options = ({
       {options.map((opt, index) => (
         <div
           key={index}
-          className={`bg-gray-200 px-3 py-1 border-2 font-normal rounded-lg dark:bg-gray-600 ${
+          className={`bg-gray-200 px-3 py-1 border-2 font-normal rounded-lg dark:bg-gray-700 ${
             opt === answer
-              ? ' border-gray-400 dark:border-gray-800'
+              ? ' border-gray-400 dark:border-blue-500'
               : 'border-transparent'
           }`}
         >
           {opt}
         </div>
       ))}
+    </div>
+  );
+};
+
+const CardFooter = ({ id }: { id: string }) => {
+  const onEditQuestion = () => {
+    //
+  };
+
+  const onDeleteQuestion = () => {
+    //
+  };
+  return (
+    <div className="flex justify-end gap-3 p-2">
+      <SquareBtn>
+        <IoPencil />
+      </SquareBtn>
+      <SquareBtn>
+        <IoTrash />
+      </SquareBtn>
     </div>
   );
 };

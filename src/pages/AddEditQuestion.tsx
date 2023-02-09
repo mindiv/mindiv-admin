@@ -28,7 +28,7 @@ const difficulties = [
   { label: 'Hard', value: 'hard' },
 ];
 
-const NewQuestion = () => {
+const AddEditQuestion = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.category);
   const { status } = useAppSelector((state) => state.question);
@@ -93,4 +93,4 @@ const NewQuestion = () => {
   );
 };
 
-export default NewQuestion;
+export default AddEditQuestion;

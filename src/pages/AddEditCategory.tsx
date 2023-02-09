@@ -16,7 +16,7 @@ const schema = yup.object({
   cover: yup.string().url('Invalid url').required('Cover photo is required'),
 });
 
-const NewCategory = () => {
+const AddEditCategory = () => {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state) => state.category);
   const method = useForm<CreateCategoryProps>({
@@ -60,4 +60,4 @@ const NewCategory = () => {
   );
 };
 
-export default NewCategory;
+export default AddEditCategory;
