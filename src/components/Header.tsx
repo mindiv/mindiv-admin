@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { IoAdd } from 'react-icons/io5';
+import { useState } from 'react';
+import { IoMenu } from 'react-icons/io5';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { Link } from 'react-router-dom';
 import { ButtonPrimary } from './misc/ Button';
@@ -8,7 +8,10 @@ import Search from './Search';
 const Header = () => {
   return (
     <div className="flex justify-between relative items-center py-5 mb-5">
-      <div className="w-1/2">
+      <div className="lg:w-1/2 flex items-center">
+        <div className="md:hidden mr-4 text-4xl text-gray-700 dark:text-gray-200 cursor-pointer">
+          <IoMenu />
+        </div>
         <Search />
       </div>
       <Dropdown />
