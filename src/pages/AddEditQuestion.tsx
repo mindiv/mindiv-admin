@@ -17,6 +17,7 @@ import {
 import { getStats } from '../features/statSlice';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { getCategories } from '../features/categorySlice';
 
 const schema = yup.object({
   question: yup.string().required('Question is required'),
@@ -24,7 +25,7 @@ const schema = yup.object({
   option2: yup.string().required('Option 2 is required'),
   option3: yup.string().required('Option 3 is required'),
   option4: yup.string().required('Option 4 is required'),
-  answer: yup.string().required('Answer is required'),
+  correctOption: yup.number().required('Correct option is required'),
   difficulty: yup.string().required(),
   description: yup.string(),
   category: yup.string().required('Category is required'),
@@ -66,7 +67,7 @@ const AddEditQuestion = () => {
     if (mode === 'edit' && question) {
       reset({
         question: question.question,
-        answer: question.answer,
+        correctOption: question.correctOption,
         option1: question.options[0],
         option2: question.options[1],
         option3: question.options[2],
@@ -85,17 +86,18 @@ const AddEditQuestion = () => {
       description: data.description,
       options: options,
       category: data.category,
-      answer: data.answer,
+      correctOption: Number(data.correctOption),
       difficulty: data.difficulty,
     };
 
     if (mode === 'new') {
       await dispatch(createQuestion(payload));
+      reset();
     } else {
       await dispatch(updateQuestion({ id, payload }));
     }
-    reset();
     await dispatch(getQuestions());
+    await dispatch(getCategories());
     await dispatch(getStats());
   };
 
@@ -116,7 +118,7 @@ const AddEditQuestion = () => {
             <CInput name="option3" label="Option 3" method={method} />
             <CInput name="option4" label="Option 4" method={method} />
             <CSelect
-              name="answer"
+              name="correctOption"
               label="Correct Option"
               method={method}
               options={correctOptions}

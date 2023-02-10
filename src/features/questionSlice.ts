@@ -22,6 +22,7 @@ const initialState: CategoryState = {
     question: '',
     options: [],
     difficulty: 'easy',
+    correctOption: 0,
     answer: '',
     category: '',
     description: '',

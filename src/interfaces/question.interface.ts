@@ -7,15 +7,15 @@ export interface CreateQuestionProps {
   description: string;
   difficulty: 'easy' | 'medium' | 'hard';
   category: string;
-  answer: string;
+  correctOption: number;
 }
 
 export interface QuestionPostPayload {
   question: string;
-  answer: string;
   options: string[];
-  description: string;
-  difficulty: string;
+  correctOption: number;
+  description?: string;
+  difficulty: 'easy' | 'medium' | 'hard';
   category: string;
 }
 
@@ -24,6 +24,7 @@ export interface QuestionData {
   question: string;
   answer: string;
   options: string[];
+  correctOption: number;
   difficulty: 'easy' | 'medium' | 'hard';
   category: string;
   description: string;
