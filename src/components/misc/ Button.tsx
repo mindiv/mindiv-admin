@@ -27,6 +27,25 @@ export const ButtonPrimary = ({
   );
 };
 
+export const ButtonDanger = ({
+  children,
+  style,
+  type = 'button',
+  click,
+  disabled,
+}: ButtonPrimaryProps) => {
+  return (
+    <button
+      onClick={click}
+      disabled={disabled}
+      type={type}
+      className={`text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm sm:w-auto ${style} px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 disabled:opacity-70`}
+    >
+      {children}
+    </button>
+  );
+};
+
 export const SquareBtn = ({ children, click, title }: any) => {
   return (
     <button

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { IoPencil, IoTrash } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { deleteQuestion, getQuestions } from '../features/questionSlice';
 import { QuestionData } from '../interfaces/question.interface';
+import DeleteQuestion from './DeleteQuestion';
 import { SquareBtn } from './misc/ Button';
 
 const QuestionList = () => {
@@ -14,11 +16,13 @@ const QuestionList = () => {
   }, [questions]);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-3">
-      {data.map((question, index) => (
-        <Question question={question} key={question._id} />
-      ))}
-    </div>
+    <>
+      <div className="grid gap-3">
+        {data.map((question, index) => (
+          <Question question={question} key={question._id} />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -28,7 +32,7 @@ interface QuestionProps {
 
 const Question = ({ question }: QuestionProps) => {
   return (
-    <div className="bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-700">
+    <div className="bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-300 dark:divide-gray-700">
       <div className="cursor-pointer mb-5 p-4">
         <p className="mb-3">{question.question}</p>
         <Options options={question.options} answer={question.answer} />
@@ -65,22 +69,33 @@ const Options = ({
 
 const CardFooter = ({ id }: { id: string }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [showConfirm, setShowConform] = useState(false);
   const onEditQuestion = () => {
     navigate(`/question/${id}/edit`);
   };
 
-  const onDeleteQuestion = () => {
-    //
+  const onDeleteQuestion = async () => {
+    await dispatch(deleteQuestion(id));
+    await dispatch(getQuestions());
   };
   return (
-    <div className="flex justify-end gap-3 p-2">
-      <SquareBtn click={onEditQuestion} title="Edit Question">
-        <IoPencil />
-      </SquareBtn>
-      <SquareBtn>
-        <IoTrash />
-      </SquareBtn>
-    </div>
+    <>
+      <div className="flex justify-end gap-3 p-2">
+        <SquareBtn click={onEditQuestion} title="Edit Question">
+          <IoPencil />
+        </SquareBtn>
+        <SquareBtn click={() => setShowConform(true)}>
+          <IoTrash />
+        </SquareBtn>
+      </div>
+      {showConfirm && (
+        <DeleteQuestion
+          click={onDeleteQuestion}
+          close={() => setShowConform(false)}
+        />
+      )}
+    </>
   );
 };
 

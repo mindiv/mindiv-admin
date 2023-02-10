@@ -7,7 +7,12 @@ interface ModalProps {
 }
 
 const Modal = ({ children, close, title }: ModalProps) => {
-  return <div></div>;
+  return (
+    <div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 };
 
 export default Modal;

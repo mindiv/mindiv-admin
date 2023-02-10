@@ -36,6 +36,13 @@ const difficulties = [
   { label: 'Hard', value: 'hard' },
 ];
 
+const correctOptions = [
+  { label: 'Option 1', value: '0' },
+  { label: 'Option 2', value: '1' },
+  { label: 'Option 3', value: '2' },
+  { label: 'Option 4', value: '3' },
+];
+
 const AddEditQuestion = () => {
   const dispatch = useAppDispatch();
   const { id = '' } = useParams();
@@ -108,7 +115,12 @@ const AddEditQuestion = () => {
             <CInput name="option2" label="Option 2" method={method} />
             <CInput name="option3" label="Option 3" method={method} />
             <CInput name="option4" label="Option 4" method={method} />
-            <CInput name="answer" label="Correct Answer" method={method} />
+            <CSelect
+              name="answer"
+              label="Correct Option"
+              method={method}
+              options={correctOptions}
+            />
             <CSelect
               name="category"
               label="Categories"
@@ -123,9 +135,15 @@ const AddEditQuestion = () => {
             />
             <CTextarea name="description" label="Description" method={method} />
           </InputGroup>
-          <ButtonPrimary type="submit" disabled={status === 'loading'}>
-            {status === 'loading' ? 'Loading...' : 'Create Question'}
-          </ButtonPrimary>
+          {mode === 'new' ? (
+            <ButtonPrimary type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Loading...' : 'Create Question'}
+            </ButtonPrimary>
+          ) : (
+            <ButtonPrimary type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Loading...' : 'Update Question'}
+            </ButtonPrimary>
+          )}
         </form>
       </div>
     </div>
