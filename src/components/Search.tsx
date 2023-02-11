@@ -4,7 +4,7 @@ import { IoClose, IoSearch } from 'react-icons/io5';
 const Search = () => {
   const [query, setQuery] = useState<string>('Titanic');
   return (
-    <div className="flex items-center w-full relative">
+    <div className="sm:flex hidden  items-center w-full relative">
       <span className="absolute inste-y-0 left-0 flex items-center ml-3 pointer-events-none text-gray-400">
         <IoSearch />
       </span>

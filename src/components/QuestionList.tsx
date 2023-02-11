@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { deleteQuestion, getQuestions } from '../features/questionSlice';
 import { QuestionData } from '../interfaces/question.interface';
-import DeleteQuestion from './DeleteQuestion';
+import ConfirmDelete from './ConfirmDelete';
 import { SquareBtn } from './misc/ Button';
 
 const QuestionList = () => {
@@ -17,7 +17,7 @@ const QuestionList = () => {
 
   return (
     <>
-      <div className="grid gap-3">
+      <div className="grid gap-3 lg:grid-cols-2">
         {data.map((question, index) => (
           <Question question={question} key={question._id} />
         ))}
@@ -32,8 +32,8 @@ interface QuestionProps {
 
 const Question = ({ question }: QuestionProps) => {
   return (
-    <div className="bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-300 dark:divide-gray-700">
-      <div className="cursor-pointer mb-5 p-4">
+    <div className="flex flex-col bg-gray-100 rounded-lg text-gray-700 dark:bg-gray-800 dark:text-gray-200 divide-y divide-gray-300 dark:divide-gray-700">
+      <div className="cursor-pointer mb-5 p-4 flex-1">
         <p className="mb-3">{question.question}</p>
         <Options options={question.options} answer={question.answer} />
       </div>
@@ -71,6 +71,7 @@ const CardFooter = ({ id }: { id: string }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [showConfirm, setShowConform] = useState(false);
+
   const onEditQuestion = () => {
     navigate(`/question/${id}/edit`);
   };
@@ -79,6 +80,7 @@ const CardFooter = ({ id }: { id: string }) => {
     await dispatch(deleteQuestion(id));
     await dispatch(getQuestions());
   };
+
   return (
     <>
       <div className="flex justify-end gap-3 p-2">
@@ -90,7 +92,7 @@ const CardFooter = ({ id }: { id: string }) => {
         </SquareBtn>
       </div>
       {showConfirm && (
-        <DeleteQuestion
+        <ConfirmDelete
           click={onDeleteQuestion}
           close={() => setShowConform(false)}
         />
