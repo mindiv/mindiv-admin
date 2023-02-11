@@ -50,7 +50,7 @@ const AddEditQuestion = () => {
   const { id = '' } = useParams();
   const { categories } = useAppSelector((state) => state.category);
   const { status, question } = useAppSelector((state) => state.question);
-  const [mode, setMode] = useState<string>('new');
+  const [mode, setMode] = useState<'new' | 'edit'>('new');
   const method = useForm<CreateQuestionProps>({
     resolver: yupResolver(schema),
   });

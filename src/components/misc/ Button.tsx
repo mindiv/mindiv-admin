@@ -75,7 +75,7 @@ export const SquareBtn = ({ children, click, title }: any) => {
       id="theme-toggle"
       onClick={() => click()}
       type="button"
-      className={`text-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-lg p-2.5`}
+      className={`text-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-lg p-2.5`}
     >
       {children}
     </button>
