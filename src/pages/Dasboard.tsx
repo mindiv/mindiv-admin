@@ -4,6 +4,7 @@ import { useAppDispatch } from '../app/hooks';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { getCategories } from '../features/categorySlice';
+import { getQuestions } from '../features/questionSlice';
 import { getStats } from '../features/statSlice';
 
 const Dasboard = () => {
@@ -11,11 +12,12 @@ const Dasboard = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getQuestions());
     dispatch(getStats());
   }, []);
 
   return (
-    <div className="flex bg-white dark:bg-gray-900 overflow-auto">
+    <div className="flex md:ml-64 bg-white dark:bg-gray-900 overflow-y-auto">
       <Sidebar />
       <div className="container mx-auto max-h-full h-screen px-4 flex flex-col flex-1">
         <Header />

@@ -4,6 +4,7 @@ import appReducer from '../features/appSlice';
 import userReducer from '../features/userSlice';
 import categoryReducer from '../features/categorySlice';
 import statReducer from '../features/statSlice';
+import questionReducer from '../features/questionSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     user: userReducer,
     stat: statReducer,
     category: categoryReducer,
+    question: questionReducer,
   },
 });
 
