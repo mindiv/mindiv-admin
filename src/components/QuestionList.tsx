@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { deleteQuestion, getQuestions } from '../features/questionSlice';
 import { QuestionData } from '../interfaces/question.interface';
+import { notifyError, notifySuccess } from '../utils/toast';
 import ConfirmDelete from './ConfirmDelete';
 import { SquareBtn } from './misc/ Button';
 
@@ -77,7 +78,10 @@ const CardFooter = ({ id }: { id: string }) => {
   };
 
   const onDeleteQuestion = async () => {
-    await dispatch(deleteQuestion(id));
+    await dispatch(deleteQuestion(id))
+      .unwrap()
+      .then((res) => notifySuccess(res.message))
+      .catch((err) => notifyError(err.message));
     await dispatch(getQuestions());
   };
 

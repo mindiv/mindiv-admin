@@ -18,6 +18,7 @@ import { getStats } from '../features/statSlice';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getCategories } from '../features/categorySlice';
+import { notifyError, notifySuccess } from '../utils/toast';
 
 const schema = yup.object({
   question: yup.string().required('Question is required'),
@@ -91,10 +92,16 @@ const AddEditQuestion = () => {
     };
 
     if (mode === 'new') {
-      await dispatch(createQuestion(payload));
+      await dispatch(createQuestion(payload))
+        .unwrap()
+        .then((res) => notifySuccess(res.message))
+        .catch((err) => notifyError(err.message || 'Error'));
       reset();
     } else {
-      await dispatch(updateQuestion({ id, payload }));
+      await dispatch(updateQuestion({ id, payload }))
+        .unwrap()
+        .then((res) => notifySuccess(res.message))
+        .catch((err) => notifyError(err.message));
     }
     await dispatch(getQuestions());
     await dispatch(getCategories());

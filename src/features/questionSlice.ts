@@ -12,6 +12,7 @@ type CategoryState = {
   question: QuestionData;
   error: any;
   info: any;
+  message: string;
 };
 
 const initialState: CategoryState = {
@@ -29,6 +30,7 @@ const initialState: CategoryState = {
   },
   error: null,
   info: null,
+  message: '',
 };
 
 export const getQuestions = createAsyncThunk(
@@ -134,7 +136,10 @@ const questionSlice = createSlice({
         (state, action: PayloadAction<any>) => {
           state.status = 'succeeded';
         }
-      );
+      )
+      .addCase(createQuestion.rejected, (state) => {
+        state.status = 'failed';
+      });
 
     builder
       .addCase(updateQuestion.pending, (state) => {
@@ -144,11 +149,11 @@ const questionSlice = createSlice({
         updateQuestion.fulfilled,
         (state, action: PayloadAction<any>) => {
           state.status = 'succeeded';
-          console.log('UPDATE', action.payload);
         }
       )
       .addCase(updateQuestion.rejected, (state, action) => {
-        console.log(action);
+        state.status = 'failed';
+        state.error = action.payload;
       });
 
     builder
@@ -159,11 +164,12 @@ const questionSlice = createSlice({
         deleteQuestion.fulfilled,
         (state, action: PayloadAction<any>) => {
           state.status = 'succeeded';
-          console.log('DEL', action.payload);
+          state.message = action.payload.message;
         }
       )
       .addCase(deleteQuestion.rejected, (state, action) => {
-        console.log(action);
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });

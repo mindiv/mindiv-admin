@@ -9,6 +9,7 @@ import { CreateCategoryProps } from '../interfaces/category.interface';
 import { createCategory, getCategories } from '../features/categorySlice';
 import { getStats } from '../features/statSlice';
 import { HeadingPara } from '../components/misc/Heading';
+import { useParams } from 'react-router-dom';
 
 const schema = yup.object({
   name: yup.string().required('Category name is required'),
@@ -18,6 +19,7 @@ const schema = yup.object({
 
 const AddEditCategory = () => {
   const dispatch = useAppDispatch();
+  const { id = '' } = useParams();
   const { status } = useAppSelector((state) => state.category);
   const method = useForm<CreateCategoryProps>({
     resolver: yupResolver(schema),
