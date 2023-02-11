@@ -88,9 +88,15 @@ const AddEditCategory = () => {
             <CTextarea name="description" label="Description" method={method} />
             <CInput name="cover" label="Cover" method={method} />
           </InputGroup>
-          <ButtonPrimary type="submit" disabled={status === 'loading'}>
-            {status == 'loading' ? 'Loading' : 'Create category'}
-          </ButtonPrimary>
+          {mode === 'new' ? (
+            <ButtonPrimary type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Loading...' : 'Create Category'}
+            </ButtonPrimary>
+          ) : (
+            <ButtonPrimary type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Loading...' : 'Update Category'}
+            </ButtonPrimary>
+          )}
         </form>
       </div>
     </div>

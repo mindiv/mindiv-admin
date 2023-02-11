@@ -10,7 +10,7 @@ const ConfirmDelete = ({ close, click }: { close: any; click: any }) => {
       <div className="relative p-4 rounded-lg md:w-96 text-gray-100 bg-gray-200 dark:bg-gray-800 shadow-2xl">
         <h2 className="font-bold text-2xl mb-3">Confirm Deletion</h2>
         <p className="mb-4">
-          This item will be permanently removed from your account and cannot be{' '}
+          This item will be permanently removed from database and cannot be{' '}
           <b>recovered</b>
         </p>
         <div>
