@@ -1,4 +1,4 @@
-import { IoChatbubble, IoGrid, IoPeople } from 'react-icons/io5';
+import { IoChatbubble, IoGrid, IoLockClosed, IoPeople } from 'react-icons/io5';
 import { useAppSelector } from '../app/hooks';
 import { Heading1 } from './misc/Heading';
 import Number from './misc/Number';
@@ -7,6 +7,7 @@ const Stats = () => {
   const { stats } = useAppSelector((state) => state.stat);
   const statsData = [
     { name: 'Users', total: stats?.users, icon: <IoPeople /> },
+    { name: 'Admins', total: 0, icon: <IoLockClosed /> },
     { name: 'Categories', total: stats?.categories, icon: <IoGrid /> },
     { name: 'Questions', total: stats?.questions, icon: <IoChatbubble /> },
   ];
@@ -14,7 +15,7 @@ const Stats = () => {
   return (
     <div className="mb-20">
       <Heading1 text="Statistics" />
-      <div className="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-3">
         {statsData.map((data) => (
           <StatCard data={data} key={data.name} />
         ))}
